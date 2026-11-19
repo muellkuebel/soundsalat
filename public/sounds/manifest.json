@@ -1,4 +1,629 @@
 {
-  "comment": "Eigene WAV- oder MP3-Dateien unter public/sounds/ ablegen und hier eintragen. Sie erscheinen zusätzlich zu den eingebauten Tönen. duration ist die Länge in Sekunden.",
-  "clips": []
+  "comment": "CC0-Klänge. duration ist die Länge in Sekunden. Eigene Dateien können ergänzt werden.",
+  "clips": [
+    {
+      "id": "halloween-geist",
+      "name": "Geist",
+      "category": "halloween",
+      "icon": "ghost",
+      "file": "halloween/halloween-geist.mp3",
+      "duration": 2.77
+    },
+    {
+      "id": "halloween-spuk",
+      "name": "Spuk",
+      "category": "halloween",
+      "icon": "ghost",
+      "file": "halloween/halloween-spuk.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "halloween-donner",
+      "name": "Donner",
+      "category": "halloween",
+      "icon": "sparkle",
+      "file": "halloween/halloween-donner.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "halloween-knarren",
+      "name": "Knarren",
+      "category": "halloween",
+      "icon": "castle",
+      "file": "halloween/halloween-knarren.mp3",
+      "duration": 0.47
+    },
+    {
+      "id": "halloween-glocke",
+      "name": "Glocke",
+      "category": "halloween",
+      "icon": "bell",
+      "file": "halloween/halloween-glocke.mp3",
+      "duration": 0.63
+    },
+    {
+      "id": "halloween-zauber",
+      "name": "Zauber",
+      "category": "halloween",
+      "icon": "sparkle",
+      "file": "halloween/halloween-zauber.mp3",
+      "duration": 1.65
+    },
+    {
+      "id": "halloween-heulen",
+      "name": "Heulen",
+      "category": "halloween",
+      "icon": "ghost",
+      "file": "halloween/halloween-heulen.mp3",
+      "duration": 0.84
+    },
+    {
+      "id": "halloween-tuer",
+      "name": "Tür",
+      "category": "halloween",
+      "icon": "castle",
+      "file": "halloween/halloween-tuer.mp3",
+      "duration": 0.94
+    },
+    {
+      "id": "halloween-kette",
+      "name": "Kette",
+      "category": "halloween",
+      "icon": "bell",
+      "file": "halloween/halloween-kette.mp3",
+      "duration": 0.44
+    },
+    {
+      "id": "castle-tor",
+      "name": "Tor",
+      "category": "castle",
+      "icon": "castle",
+      "file": "castle/castle-tor.mp3",
+      "duration": 1.41
+    },
+    {
+      "id": "castle-schwert",
+      "name": "Schwert",
+      "category": "castle",
+      "icon": "sword",
+      "file": "castle/castle-schwert.mp3",
+      "duration": 0.34
+    },
+    {
+      "id": "castle-pferd",
+      "name": "Pferd",
+      "category": "castle",
+      "icon": "horse",
+      "file": "castle/castle-pferd.mp3",
+      "duration": 6.03
+    },
+    {
+      "id": "castle-schritte",
+      "name": "Schritte",
+      "category": "castle",
+      "icon": "drum",
+      "file": "castle/castle-schritte.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "castle-riegel",
+      "name": "Riegel",
+      "category": "castle",
+      "icon": "castle",
+      "file": "castle/castle-riegel.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "castle-fanfare",
+      "name": "Fanfare",
+      "category": "castle",
+      "icon": "music",
+      "file": "castle/castle-fanfare.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "castle-klinge",
+      "name": "Klinge",
+      "category": "castle",
+      "icon": "sword",
+      "file": "castle/castle-klinge.mp3",
+      "duration": 0.44
+    },
+    {
+      "id": "castle-buch",
+      "name": "Buch",
+      "category": "castle",
+      "icon": "note",
+      "file": "castle/castle-buch.mp3",
+      "duration": 0.18
+    },
+    {
+      "id": "castle-ruestung",
+      "name": "Rüstung",
+      "category": "castle",
+      "icon": "sword",
+      "file": "castle/castle-ruestung.mp3",
+      "duration": 1.33
+    },
+    {
+      "id": "fire-knistern",
+      "name": "Knistern",
+      "category": "fire",
+      "icon": "flame",
+      "file": "fire/fire-knistern.mp3",
+      "duration": 3.63
+    },
+    {
+      "id": "fire-lagerfeuer",
+      "name": "Lagerfeuer",
+      "category": "fire",
+      "icon": "flame",
+      "file": "fire/fire-lagerfeuer.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "fire-flamme",
+      "name": "Flamme",
+      "category": "fire",
+      "icon": "flame",
+      "file": "fire/fire-flamme.mp3",
+      "duration": 0.5
+    },
+    {
+      "id": "fire-funken",
+      "name": "Funken",
+      "category": "fire",
+      "icon": "sparkle",
+      "file": "fire/fire-funken.mp3",
+      "duration": 1.04
+    },
+    {
+      "id": "fire-knall",
+      "name": "Knall",
+      "category": "fire",
+      "icon": "drum",
+      "file": "fire/fire-knall.mp3",
+      "duration": 0.52
+    },
+    {
+      "id": "fire-zauberfeuer",
+      "name": "Feuerzauber",
+      "category": "fire",
+      "icon": "flame",
+      "file": "fire/fire-zauberfeuer.mp3",
+      "duration": 0.6
+    },
+    {
+      "id": "fire-lohe",
+      "name": "Lohe",
+      "category": "fire",
+      "icon": "flame",
+      "file": "fire/fire-lohe.mp3",
+      "duration": 1.23
+    },
+    {
+      "id": "fire-zischen",
+      "name": "Zischen",
+      "category": "fire",
+      "icon": "sparkle",
+      "file": "fire/fire-zischen.mp3",
+      "duration": 2.32
+    },
+    {
+      "id": "princess-funkeln",
+      "name": "Funkeln",
+      "category": "princess",
+      "icon": "sparkle",
+      "file": "princess/princess-funkeln.mp3",
+      "duration": 1.49
+    },
+    {
+      "id": "princess-gloeckchen",
+      "name": "Glöckchen",
+      "category": "princess",
+      "icon": "bell",
+      "file": "princess/princess-gloeckchen.mp3",
+      "duration": 0.42
+    },
+    {
+      "id": "princess-weise",
+      "name": "Weise",
+      "category": "princess",
+      "icon": "music",
+      "file": "princess/princess-weise.mp3",
+      "duration": 0.5
+    },
+    {
+      "id": "princess-stab",
+      "name": "Zauberstab",
+      "category": "princess",
+      "icon": "sparkle",
+      "file": "princess/princess-stab.mp3",
+      "duration": 1.41
+    },
+    {
+      "id": "princess-glocke",
+      "name": "Glocke",
+      "category": "princess",
+      "icon": "bell",
+      "file": "princess/princess-glocke.mp3",
+      "duration": 1.12
+    },
+    {
+      "id": "princess-glanz",
+      "name": "Glanz",
+      "category": "princess",
+      "icon": "stars",
+      "file": "princess/princess-glanz.mp3",
+      "duration": 0.34
+    },
+    {
+      "id": "princess-kristall",
+      "name": "Kristall",
+      "category": "princess",
+      "icon": "sparkle",
+      "file": "princess/princess-kristall.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "princess-stern",
+      "name": "Stern",
+      "category": "princess",
+      "icon": "stars",
+      "file": "princess/princess-stern.mp3",
+      "duration": 0.89
+    },
+    {
+      "id": "princess-krone",
+      "name": "Krone",
+      "category": "princess",
+      "icon": "crown",
+      "file": "princess/princess-krone.mp3",
+      "duration": 0.78
+    },
+    {
+      "id": "football-pfeife",
+      "name": "Pfeife",
+      "category": "football",
+      "icon": "whistle",
+      "file": "football/football-pfeife.mp3",
+      "duration": 2.35
+    },
+    {
+      "id": "football-pfiff",
+      "name": "Pfiff",
+      "category": "football",
+      "icon": "whistle",
+      "file": "football/football-pfiff.mp3",
+      "duration": 2.09
+    },
+    {
+      "id": "football-jubel",
+      "name": "Jubel",
+      "category": "football",
+      "icon": "stars",
+      "file": "football/football-jubel.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "football-schuss",
+      "name": "Schuss",
+      "category": "football",
+      "icon": "ball",
+      "file": "football/football-schuss.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "football-tor",
+      "name": "Tor",
+      "category": "football",
+      "icon": "bell",
+      "file": "football/football-tor.mp3",
+      "duration": 0.55
+    },
+    {
+      "id": "football-pass",
+      "name": "Pass",
+      "category": "football",
+      "icon": "ball",
+      "file": "football/football-pass.mp3",
+      "duration": 0.94
+    },
+    {
+      "id": "football-anstoss",
+      "name": "Anstoß",
+      "category": "football",
+      "icon": "ball",
+      "file": "football/football-anstoss.mp3",
+      "duration": 0.37
+    },
+    {
+      "id": "football-fanfare",
+      "name": "Fanfare",
+      "category": "football",
+      "icon": "music",
+      "file": "football/football-fanfare.mp3",
+      "duration": 1.75
+    },
+    {
+      "id": "circus-applaus",
+      "name": "Applaus",
+      "category": "circus",
+      "icon": "stars",
+      "file": "circus/circus-applaus.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "circus-tusch",
+      "name": "Tusch",
+      "category": "circus",
+      "icon": "music",
+      "file": "circus/circus-tusch.mp3",
+      "duration": 0.65
+    },
+    {
+      "id": "circus-hupe",
+      "name": "Hupe",
+      "category": "circus",
+      "icon": "clown",
+      "file": "circus/circus-hupe.mp3",
+      "duration": 0.68
+    },
+    {
+      "id": "circus-gong",
+      "name": "Gong",
+      "category": "circus",
+      "icon": "bell",
+      "file": "circus/circus-gong.mp3",
+      "duration": 1.2
+    },
+    {
+      "id": "circus-klingel",
+      "name": "Klingel",
+      "category": "circus",
+      "icon": "bell",
+      "file": "circus/circus-klingel.mp3",
+      "duration": 1.18
+    },
+    {
+      "id": "circus-melodie",
+      "name": "Melodie",
+      "category": "circus",
+      "icon": "music",
+      "file": "circus/circus-melodie.mp3",
+      "duration": 0.91
+    },
+    {
+      "id": "circus-muenzen",
+      "name": "Münzen",
+      "category": "circus",
+      "icon": "sparkle",
+      "file": "circus/circus-muenzen.mp3",
+      "duration": 0.65
+    },
+    {
+      "id": "circus-pauke",
+      "name": "Pauke",
+      "category": "circus",
+      "icon": "drum",
+      "file": "circus/circus-pauke.mp3",
+      "duration": 0.44
+    },
+    {
+      "id": "circus-zauber",
+      "name": "Zauber",
+      "category": "circus",
+      "icon": "sparkle",
+      "file": "circus/circus-zauber.mp3",
+      "duration": 1.85
+    },
+    {
+      "id": "pirates-wellen",
+      "name": "Wellen",
+      "category": "pirates",
+      "icon": "wave",
+      "file": "pirates/pirates-wellen.mp3",
+      "duration": 3.29
+    },
+    {
+      "id": "pirates-kanone",
+      "name": "Kanone",
+      "category": "pirates",
+      "icon": "pistol",
+      "file": "pirates/pirates-kanone.mp3",
+      "duration": 1.49
+    },
+    {
+      "id": "pirates-treffer",
+      "name": "Treffer",
+      "category": "pirates",
+      "icon": "drum",
+      "file": "pirates/pirates-treffer.mp3",
+      "duration": 2.56
+    },
+    {
+      "id": "pirates-moewe",
+      "name": "Möwe",
+      "category": "pirates",
+      "icon": "bird",
+      "file": "pirates/pirates-moewe.mp3",
+      "duration": 1.41
+    },
+    {
+      "id": "pirates-muenzen",
+      "name": "Münzen",
+      "category": "pirates",
+      "icon": "sparkle",
+      "file": "pirates/pirates-muenzen.mp3",
+      "duration": 0.78
+    },
+    {
+      "id": "pirates-kette",
+      "name": "Kette",
+      "category": "pirates",
+      "icon": "bell",
+      "file": "pirates/pirates-kette.mp3",
+      "duration": 0.39
+    },
+    {
+      "id": "pirates-knarren",
+      "name": "Knarren",
+      "category": "pirates",
+      "icon": "castle",
+      "file": "pirates/pirates-knarren.mp3",
+      "duration": 0.76
+    },
+    {
+      "id": "pirates-platscher",
+      "name": "Platscher",
+      "category": "pirates",
+      "icon": "wave",
+      "file": "pirates/pirates-platscher.mp3",
+      "duration": 1.38
+    },
+    {
+      "id": "pirates-weise",
+      "name": "Weise",
+      "category": "pirates",
+      "icon": "music",
+      "file": "pirates/pirates-weise.mp3",
+      "duration": 0.63
+    },
+    {
+      "id": "space-laser",
+      "name": "Laser",
+      "category": "space",
+      "icon": "pistol",
+      "file": "space/space-laser.mp3",
+      "duration": 0.29
+    },
+    {
+      "id": "space-strahl",
+      "name": "Strahl",
+      "category": "space",
+      "icon": "pistol",
+      "file": "space/space-strahl.mp3",
+      "duration": 0.6
+    },
+    {
+      "id": "space-rakete",
+      "name": "Rakete",
+      "category": "space",
+      "icon": "rocket",
+      "file": "space/space-rakete.mp3",
+      "duration": 1.57
+    },
+    {
+      "id": "space-motor",
+      "name": "Motor",
+      "category": "space",
+      "icon": "rocket",
+      "file": "space/space-motor.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "space-piep",
+      "name": "Piep",
+      "category": "space",
+      "icon": "sparkle",
+      "file": "space/space-piep.mp3",
+      "duration": 0.37
+    },
+    {
+      "id": "space-funk",
+      "name": "Funk",
+      "category": "space",
+      "icon": "music",
+      "file": "space/space-funk.mp3",
+      "duration": 4.05
+    },
+    {
+      "id": "space-beamen",
+      "name": "Beamen",
+      "category": "space",
+      "icon": "sparkle",
+      "file": "space/space-beamen.mp3",
+      "duration": 0.5
+    },
+    {
+      "id": "space-schild",
+      "name": "Schild",
+      "category": "space",
+      "icon": "planet",
+      "file": "space/space-schild.mp3",
+      "duration": 0.73
+    },
+    {
+      "id": "space-alarm",
+      "name": "Alarm",
+      "category": "space",
+      "icon": "bell",
+      "file": "space/space-alarm.mp3",
+      "duration": 0.55
+    },
+    {
+      "id": "skate-rollen",
+      "name": "Rollen",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-rollen.mp3",
+      "duration": 1.2
+    },
+    {
+      "id": "skate-sprung",
+      "name": "Sprung",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-sprung.mp3",
+      "duration": 0.31
+    },
+    {
+      "id": "skate-landung",
+      "name": "Landung",
+      "category": "skate",
+      "icon": "drum",
+      "file": "skate/skate-landung.mp3",
+      "duration": 0.18
+    },
+    {
+      "id": "skate-klick",
+      "name": "Klick",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-klick.mp3",
+      "duration": 0.42
+    },
+    {
+      "id": "skate-brett",
+      "name": "Brett",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-brett.mp3",
+      "duration": 0.29
+    },
+    {
+      "id": "skate-rutschen",
+      "name": "Rutschen",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-rutschen.mp3",
+      "duration": 1.04
+    },
+    {
+      "id": "skate-jubel",
+      "name": "Jubel",
+      "category": "skate",
+      "icon": "stars",
+      "file": "skate/skate-jubel.mp3",
+      "duration": 0.99
+    },
+    {
+      "id": "skate-ollie",
+      "name": "Ollie",
+      "category": "skate",
+      "icon": "skate",
+      "file": "skate/skate-ollie.mp3",
+      "duration": 0.24
+    }
+  ]
 }

@@ -33,20 +33,29 @@ export async function loadExtraSounds(): Promise<SoundItem[]> {
     for (const clip of data.clips ?? []) {
       if (!clip?.id || !clip.file || !clip.category || !isCategoryId(clip.category)) continue
       extras.push({
-        id: `file:${clip.id}`,
+        id: clip.id,
         name: clip.name?.trim() || clip.id,
         category: clip.category,
         icon: clip.icon && isIconName(clip.icon) ? clip.icon : 'music',
         duration: typeof clip.duration === 'number' && clip.duration > 0 ? clip.duration : 1,
         file: `/sounds/${clip.file.replace(/^\/+/, '')}`,
+        recipe: fallbackRecipe(clip.category),
       })
     }
-    sounds = [...BUILTIN_SOUNDS, ...extras]
+    sounds = extras.length > 0 ? extras : [...BUILTIN_SOUNDS]
     return extras
   } catch {
     sounds = [...BUILTIN_SOUNDS]
     return []
   }
+}
+
+function fallbackRecipe(category: string) {
+  return BUILTIN_SOUNDS.find((item) => item.category === category && item.recipe)?.recipe
+}
+
+function builtinById(id: string) {
+  return BUILTIN_SOUNDS.find((item) => item.id === id)
 }
 
 export function registerRecording(id: string, blob: Blob, buffer?: AudioBuffer) {
@@ -64,14 +73,17 @@ export function forgetRecording(id: string) {
 export function getBuffer(id: string): Promise<AudioBuffer> {
   const existing = bufferPromises.get(id)
   if (existing) return existing
-  const sound = soundById(id)
+  const sound = soundById(id) ?? builtinById(id)
   let promise: Promise<AudioBuffer>
   if (id.startsWith('rec:')) {
     const blob = recordingBlobs.get(id)
     if (!blob) return Promise.reject(new Error('Aufnahme fehlt'))
     promise = decodeBlob(blob)
   } else if (sound?.file) {
-    promise = decodeUrl(sound.file)
+    promise = decodeUrl(sound.file).catch(() => {
+      if (!sound.recipe) throw new Error('Datei fehlt')
+      return renderSound(`${sound.id}-fallback`, Math.max(sound.duration, 0.4), sound.recipe)
+    })
   } else if (sound?.recipe) {
     promise = renderSound(sound.id, sound.duration, sound.recipe)
   } else {

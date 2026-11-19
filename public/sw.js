@@ -1,4 +1,4 @@
-const CACHE = 'soundsalat-v1'
+const CACHE = 'soundsalat-v2'
 const PRECACHE = [
   '/',
   '/manifest.webmanifest',
@@ -15,8 +15,23 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE)
+      let urls = [...PRECACHE]
+      try {
+        const manifest = await fetch('/sounds/manifest.json')
+        if (manifest.ok) {
+          const data = await manifest.json()
+          for (const clip of data.clips || []) {
+            if (clip && typeof clip.file === 'string') {
+              urls.push('/sounds/' + clip.file.replace(/^\/+/, ''))
+            }
+          }
+        }
+      } catch {
+        /* sounds are cached again on the next visit */
+      }
+      urls = [...new Set(urls)]
       await Promise.all(
-        PRECACHE.map(async (url) => {
+        urls.map(async (url) => {
           try {
             const response = await fetch(url)
             if (response.ok) await cache.put(url, response)

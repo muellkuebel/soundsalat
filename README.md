@@ -94,11 +94,11 @@ On the computer itself, `http://127.0.0.1:43123` is a secure context, so the mic
 - The scissors open the trim view. Drag the pink handles, then confirm. Trimming only stores start and end offsets.
 - The share button mixes every lane and exports a WAV file. It uses the system share sheet when the browser can share files, and otherwise downloads the file.
 
-## Add real sounds later
+## Sounds
 
-The built-in sounds are synthesized in the browser (drums, whistles, lasers, wind, beeps, short melodies). They are placeholders so the app works with no audio files.
+Each category ships about eight or nine real sound effects, trimmed and saved as mono MP3. They are all **CC0** (public domain). Authors and source pages are in [CREDITS.md](CREDITS.md). If a file fails to load, that clip falls back to a short synthesized sound. The service worker caches the MP3s for offline use after the production build has been opened once.
 
-To add your own recordings:
+To add more recordings:
 
 1. Put a `.wav` or `.mp3` under `public/sounds/`, for example `public/sounds/halloween/eule.mp3`.
 2. Add an entry to `public/sounds/manifest.json`:
@@ -126,7 +126,7 @@ To add your own recordings:
 
 ## Limitations
 
-- Placeholder sounds are simple synthesis, not a sample library.
+- The bundled effects are CC0 recordings, not a commercial sample library. A missing file falls back to a short synthesized sound.
 - Exports are uncompressed WAV, so longer stories make larger files.
 - Trims do not rewrite the recording. They store start and end offsets.
 - An iPad and an Android tablet do not share projects. Each browser profile has its own IndexedDB.
