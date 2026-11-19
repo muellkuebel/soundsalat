@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { buildBackup, parseBackup } from '../backup.ts'
+import { downloadBlob } from '../audio/exportWav.ts'
 import { categoryById } from '../categories.ts'
 import { formatClock, projectDuration } from '../lib/time.ts'
 import { useStore } from '../store.tsx'
 import type { Project, ThemeId } from '../types.ts'
 import {
   ConfirmDialog,
-  GateDialog,
   HelpDialog,
   MenuDialog,
   NewProjectDialog,
@@ -21,7 +22,6 @@ type Dialog =
   | { type: 'new' }
   | { type: 'menu'; id: string }
   | { type: 'rename'; id: string }
-  | { type: 'gate'; then: 'parent' | { deleteId: string } }
   | { type: 'parent' }
   | { type: 'confirm-delete'; id: string }
   | { type: 'confirm-all' }
@@ -35,20 +35,42 @@ export function Home() {
     return store.projects.find((project) => project.id === id)
   }
 
-  function askParent(then: 'parent' | { deleteId: string }) {
-    if (store.parentUnlocked) {
-      if (then === 'parent') setDialog({ type: 'parent' })
-      else setDialog({ type: 'confirm-delete', id: then.deleteId })
-      return
+  async function exportBackup() {
+    try {
+      const blob = await buildBackup(store.projects, store.recordings)
+      const file = new File([blob], 'soundsalat-sicherung.soundsalat', { type: 'application/zip' })
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: 'Soundsalat-Sicherung' })
+          store.showToast('Sicherung geteilt')
+          return
+        } catch (error) {
+          if (error instanceof DOMException && error.name === 'AbortError') return
+        }
+      }
+      downloadBlob(blob, file.name)
+      store.showToast('Sicherung gespeichert')
+    } catch {
+      store.showToast('Sicherung hat nicht geklappt.')
     }
-    setDialog({ type: 'gate', then })
+  }
+
+  async function importBackup(file: File) {
+    try {
+      const data = await parseBackup(file)
+      await store.restoreBackup(data.projects, data.recordings)
+      setDialog(null)
+      store.showToast('Sicherung geladen')
+    } catch (error) {
+      store.showToast(error instanceof Error ? error.message : 'Sicherung konnte nicht geladen werden.')
+    }
   }
 
   return (
     <div className="home" data-screen="home">
       <header className="home-top">
-        <button type="button" className="parent-btn" onClick={() => askParent('parent')}>
-          Für Eltern
+        <button type="button" className="parent-btn" onClick={() => setDialog({ type: 'parent' })}>
+          Einstellungen
         </button>
         <Logo />
         <button type="button" className="help-btn" aria-label="Hilfe" onClick={() => setDialog({ type: 'help' })}>
@@ -91,7 +113,7 @@ export function Home() {
             store.openProject(id)
           }}
           onRename={() => setDialog({ type: 'rename', id: dialog.id })}
-          onDelete={() => askParent({ deleteId: dialog.id })}
+          onDelete={() => setDialog({ type: 'confirm-delete', id: dialog.id })}
         />
       ) : null}
       {dialog?.type === 'rename' && projectById(dialog.id) ? (
@@ -101,16 +123,6 @@ export function Home() {
           onSave={(title) => {
             store.renameProject(dialog.id, title)
             setDialog(null)
-          }}
-        />
-      ) : null}
-      {dialog?.type === 'gate' ? (
-        <GateDialog
-          onClose={() => setDialog(null)}
-          onSuccess={() => {
-            store.unlockParent()
-            if (dialog.then === 'parent') setDialog({ type: 'parent' })
-            else setDialog({ type: 'confirm-delete', id: dialog.then.deleteId })
           }}
         />
       ) : null}
@@ -137,6 +149,8 @@ export function Home() {
           onRename={store.renameProject}
           onDelete={(id) => setDialog({ type: 'confirm-delete', id })}
           onDeleteAll={() => setDialog({ type: 'confirm-all' })}
+          onExportBackup={() => void exportBackup()}
+          onImportBackup={(file) => void importBackup(file)}
         />
       ) : null}
       {dialog?.type === 'confirm-all' ? (

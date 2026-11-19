@@ -32,7 +32,12 @@ function transactionDone(tx: IDBTransaction): Promise<void> {
   })
 }
 
-export async function loadDatabase(): Promise<{ projects: Project[]; recordings: RecordingRecord[]; seeded: boolean }> {
+export async function loadDatabase(): Promise<{
+  projects: Project[]
+  recordings: RecordingRecord[]
+  seeded: boolean
+  demosCleared: boolean
+}> {
   const db = await openDb()
   const projectTx = db.transaction('projects', 'readonly')
   const projects = await requestToPromise(projectTx.objectStore('projects').getAll() as IDBRequest<Project[]>)
@@ -41,8 +46,12 @@ export async function loadDatabase(): Promise<{ projects: Project[]; recordings:
     recordingTx.objectStore('recordings').getAll() as IDBRequest<RecordingRecord[]>,
   )
   const metaTx = db.transaction('meta', 'readonly')
-  const seeded = Boolean(await requestToPromise(metaTx.objectStore('meta').get('seeded')))
-  return { projects: projects ?? [], recordings: recordings ?? [], seeded }
+  const meta = metaTx.objectStore('meta')
+  const seededRequest = meta.get('seeded')
+  const clearedRequest = meta.get('demosCleared')
+  const seeded = Boolean(await requestToPromise(seededRequest))
+  const demosCleared = Boolean(await requestToPromise(clearedRequest))
+  return { projects: projects ?? [], recordings: recordings ?? [], seeded, demosCleared }
 }
 
 export async function saveProject(project: Project): Promise<void> {
@@ -83,6 +92,36 @@ export async function markSeeded(): Promise<void> {
   const tx = db.transaction('meta', 'readwrite')
   tx.objectStore('meta').put(true, 'seeded')
   await transactionDone(tx)
+}
+
+export async function markDemosCleared(): Promise<void> {
+  const db = await openDb()
+  const tx = db.transaction('meta', 'readwrite')
+  tx.objectStore('meta').put(true, 'demosCleared')
+  await transactionDone(tx)
+}
+
+export async function requestPersistentStorage(): Promise<void> {
+  try {
+    if (navigator.storage?.persist) await navigator.storage.persist()
+  } catch {
+    /* the browser decides whether storage stays */
+  }
+}
+
+export async function removeRecording(id: string): Promise<void> {
+  const db = await openDb()
+  const tx = db.transaction('recordings', 'readwrite')
+  tx.objectStore('recordings').delete(id)
+  await transactionDone(tx)
+}
+
+export async function replaceDatabase(projects: Project[], recordings: RecordingRecord[]): Promise<void> {
+  await clearDatabase()
+  if (projects.length) await saveProjects(projects)
+  for (const recording of recordings) await saveRecording(recording)
+  await markSeeded()
+  await markDemosCleared()
 }
 
 export async function clearDatabase(): Promise<void> {

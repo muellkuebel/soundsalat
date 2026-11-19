@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { THEMES } from '../categories.ts'
 import { formatClock } from '../lib/time.ts'
 import { projectDuration } from '../lib/time.ts'
@@ -42,7 +42,7 @@ export function HelpDialog({ onClose }: { onClose: () => void }) {
         </div>
         <div>
           <Illustration name="music" />
-          <p>Töne auf die Spuren ziehen</p>
+          <p>Ton antippen, anhören, dann ziehen oder +</p>
         </div>
         <div>
           <Illustration name="mic" />
@@ -173,74 +173,6 @@ export function MenuDialog({
   )
 }
 
-function makeQuestion() {
-  const a = 3 + Math.floor(Math.random() * 7)
-  const b = 3 + Math.floor(Math.random() * 7)
-  return { a, b, answer: a + b }
-}
-
-export function GateDialog({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
-  const [question, setQuestion] = useState(makeQuestion)
-  const [digits, setDigits] = useState('')
-  const [tries, setTries] = useState(0)
-  const [shake, setShake] = useState(false)
-  const [hint, setHint] = useState('')
-
-  function push(digit: string) {
-    setDigits((current) => (current.length >= 2 ? current : current + digit))
-    setHint('')
-  }
-
-  function submit() {
-    if (!digits) return
-    if (Number(digits) === question.answer) {
-      onSuccess()
-      return
-    }
-    setShake(true)
-    setDigits('')
-    const nextTries = tries + 1
-    setTries(nextTries)
-    if (nextTries >= 3) {
-      setQuestion(makeQuestion())
-      setTries(0)
-      setHint('Frag eine erwachsene Person.')
-    } else {
-      setHint('Das stimmt nicht. Nochmal.')
-    }
-    window.setTimeout(() => setShake(false), 420)
-  }
-
-  return (
-    <Sheet title="Für Eltern" onClose={onClose}>
-      <h2>Nur für Erwachsene</h2>
-      <p className="gate-q">
-        Was ist {question.a} + {question.b}?
-      </p>
-      <div className={`gate-display ${shake ? 'shake' : ''}`} aria-live="polite">
-        {digits || '–'}
-      </div>
-      {hint ? <p className="hint">{hint}</p> : <p className="hint">&nbsp;</p>}
-      <div className="pad">
-        {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
-          <button type="button" key={digit} onClick={() => push(digit)}>
-            {digit}
-          </button>
-        ))}
-        <button type="button" onClick={() => setDigits((current) => current.slice(0, -1))} aria-label="Löschen">
-          ⌫
-        </button>
-        <button type="button" onClick={() => push('0')}>
-          0
-        </button>
-        <button type="button" className="pad-ok" onClick={submit}>
-          OK
-        </button>
-      </div>
-    </Sheet>
-  )
-}
-
 export function ConfirmDialog({
   title,
   body,
@@ -277,6 +209,8 @@ export function ParentDialog({
   onRename,
   onDelete,
   onDeleteAll,
+  onExportBackup,
+  onImportBackup,
 }: {
   projects: Project[]
   onClose: () => void
@@ -284,19 +218,62 @@ export function ParentDialog({
   onRename: (id: string, title: string) => void
   onDelete: (id: string) => void
   onDeleteAll: () => void
+  onExportBackup: () => void
+  onImportBackup: (file: File) => void
 }) {
   const [installable, setInstallable] = useState(canInstall())
   const [confirmAll, setConfirmAll] = useState(false)
+  const [pendingFile, setPendingFile] = useState<File | null>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
   useEffect(() => subscribeInstall(() => setInstallable(canInstall())), [])
   const sorted = [...projects].sort((a, b) => b.createdAt - a.createdAt)
 
   return (
     <div className="backdrop" role="presentation">
-      <div className="sheet wide parent-sheet" role="dialog" aria-label="Für Eltern">
-        <h2>Für Eltern</h2>
+      <div className="sheet wide parent-sheet" role="dialog" aria-label="Einstellungen" data-dialog="settings">
+        <h2>Einstellungen</h2>
         <p className="hint left">
-          Projekte und Aufnahmen bleiben auf diesem Gerät, in diesem Browser. Nichts wird hochgeladen.
+          Projekte und Aufnahmen bleiben auf diesem Gerät. Eine Sicherung kannst du in Dateien speichern und später wieder laden.
         </p>
+        <div className="row-actions">
+          <button type="button" className="primary" onClick={onExportBackup}>
+            Sicherung speichern
+          </button>
+          <button type="button" className="ghost" onClick={() => fileRef.current?.click()}>
+            Sicherung laden
+          </button>
+        </div>
+        <input
+          ref={fileRef}
+          className="sr"
+          type="file"
+          accept=".soundsalat,.zip,application/zip"
+          aria-label="Sicherungsdatei"
+          onChange={(event) => {
+            const file = event.target.files?.[0]
+            event.target.value = ''
+            if (file) setPendingFile(file)
+          }}
+        />
+        {pendingFile ? (
+          <div className="row-actions">
+            <p className="hint left">„{pendingFile.name}“ ersetzt alle Projekte auf diesem Gerät.</p>
+            <button type="button" className="ghost" onClick={() => setPendingFile(null)}>
+              Nicht laden
+            </button>
+            <button
+              type="button"
+              className="danger-text"
+              onClick={() => {
+                const file = pendingFile
+                setPendingFile(null)
+                onImportBackup(file)
+              }}
+            >
+              Jetzt ersetzen
+            </button>
+          </div>
+        ) : null}
         {installable ? (
           <button type="button" className="primary" onClick={() => void promptInstall()}>
             App installieren

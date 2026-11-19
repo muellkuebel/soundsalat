@@ -1,8 +1,18 @@
 import { useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react'
 import { createContext, useContext } from 'react'
 import { getSounds, loadExtraSounds, preloadSounds, registerRecording, forgetRecording } from './audio/library.ts'
-import { clearDatabase, loadDatabase, markSeeded, removeProject, saveProject, saveProjects, saveRecording } from './db.ts'
-import { makeSeedProjects } from './seed.ts'
+import {
+  clearDatabase,
+  loadDatabase,
+  markDemosCleared,
+  removeProject,
+  removeRecording,
+  replaceDatabase,
+  requestPersistentStorage,
+  saveProject,
+  saveRecording,
+} from './db.ts'
+import { isUntouchedDemo } from './seed.ts'
 import type { Clip, Project, RecordingRecord, ThemeId } from './types.ts'
 import { uid } from './lib/time.ts'
 
@@ -12,12 +22,13 @@ type State = {
   projects: Project[]
   recordings: RecordingRecord[]
   editorId: string | null
-  parentUnlocked: boolean
   toast: string | null
 }
 
 type Action =
   | { type: 'loaded'; projects: Project[]; recordings: RecordingRecord[]; memoryOnly?: boolean }
+  | { type: 'apply-editor'; project: Project; recordings: RecordingRecord[] }
+  | { type: 'restore'; projects: Project[]; recordings: RecordingRecord[] }
   | { type: 'open'; id: string }
   | { type: 'home' }
   | { type: 'upsert'; project: Project }
@@ -25,7 +36,6 @@ type Action =
   | { type: 'delete-all' }
   | { type: 'add-recording'; recording: RecordingRecord }
   | { type: 'toast'; message: string | null }
-  | { type: 'unlock' }
 
 const initial: State = {
   ready: false,
@@ -33,7 +43,6 @@ const initial: State = {
   projects: [],
   recordings: [],
   editorId: null,
-  parentUnlocked: false,
   toast: null,
 }
 
@@ -67,12 +76,18 @@ function reducer(state: State, action: Action): State {
       }
     case 'delete-all':
       return { ...state, projects: [], recordings: [], editorId: null }
+    case 'apply-editor':
+      return {
+        ...state,
+        projects: state.projects.map((project) => (project.id === action.project.id ? action.project : project)),
+        recordings: action.recordings,
+      }
+    case 'restore':
+      return { ...state, projects: action.projects, recordings: action.recordings, editorId: null }
     case 'add-recording':
       return { ...state, recordings: [action.recording, ...state.recordings] }
     case 'toast':
       return { ...state, toast: action.message }
-    case 'unlock':
-      return { ...state, parentUnlocked: true }
     default:
       return state
   }
@@ -90,8 +105,9 @@ type StoreValue = State & {
   updateClip: (projectId: string, clipId: string, patch: Partial<Clip>) => void
   removeClip: (projectId: string, clipId: string) => void
   addRecording: (recording: RecordingRecord, buffer?: AudioBuffer) => void
+  applyEditorSnapshot: (projectId: string, clips: Clip[], recordings: RecordingRecord[]) => void
+  restoreBackup: (projects: Project[], recordings: RecordingRecord[]) => Promise<void>
   showToast: (message: string) => void
-  unlockParent: () => void
 }
 
 const StoreContext = createContext<StoreValue | null>(null)
@@ -101,18 +117,25 @@ let bootPromise: Promise<{ projects: Project[]; recordings: RecordingRecord[]; m
 function bootApp() {
   if (!bootPromise) {
     bootPromise = (async () => {
+      void requestPersistentStorage()
       try {
         await loadExtraSounds()
         const data = await loadDatabase()
         let projects = data.projects
-        if (!data.seeded && projects.length === 0) {
-          projects = makeSeedProjects()
-          await saveProjects(projects)
-          await markSeeded()
+        let recordings = data.recordings
+        if (!data.demosCleared) {
+          const stale = projects.filter(isUntouchedDemo)
+          if (stale.length) {
+            const ids = new Set(stale.map((project) => project.id))
+            for (const project of stale) await removeProject(project.id)
+            projects = projects.filter((project) => !ids.has(project.id))
+            recordings = recordings.filter((recording) => !ids.has(recording.projectId))
+          }
+          await markDemosCleared()
         }
-        for (const recording of data.recordings) registerRecording(recording.id, recording.blob)
+        for (const recording of recordings) registerRecording(recording.id, recording.blob)
         preloadSounds(getSounds())
-        return { projects, recordings: data.recordings, memoryOnly: false }
+        return { projects, recordings, memoryOnly: false }
       } catch (error) {
         console.error(error)
         try {
@@ -121,13 +144,7 @@ function bootApp() {
           /* built-in sounds still work */
         }
         preloadSounds(getSounds())
-        let projects: Project[] = []
-        try {
-          projects = makeSeedProjects()
-        } catch {
-          projects = []
-        }
-        return { projects, recordings: [] as RecordingRecord[], memoryOnly: true }
+        return { projects: [] as Project[], recordings: [] as RecordingRecord[], memoryOnly: true }
       }
     })()
   }
@@ -140,6 +157,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   stateRef.current = state
   const projectsRef = useRef(state.projects)
   projectsRef.current = state.projects
+  const recordingsRef = useRef(state.recordings)
+  recordingsRef.current = state.recordings
   const memoryOnly = useRef(false)
   const toastTimer = useRef(0)
   const saveTimers = useRef(new Map<string, number>())
@@ -266,13 +285,55 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       },
       addRecording: (recording, buffer) => {
         registerRecording(recording.id, recording.blob, buffer)
+        recordingsRef.current = [recording, ...recordingsRef.current]
         dispatch({ type: 'add-recording', recording })
         if (!memoryOnly.current) {
           void saveRecording(recording).catch(() => showToast('Aufnahme konnte nicht gespeichert werden.'))
         }
       },
+      applyEditorSnapshot: (projectId, clips, projectRecordings) => {
+        const project = find(projectId)
+        if (!project) return
+        const previous = recordingsRef.current.filter((recording) => recording.projectId === projectId)
+        const nextIds = new Set(projectRecordings.map((recording) => recording.id))
+        const previousIds = new Set(previous.map((recording) => recording.id))
+        for (const recording of previous) {
+          if (nextIds.has(recording.id)) continue
+          forgetRecording(recording.id)
+          if (!memoryOnly.current) {
+            void removeRecording(recording.id).catch(() => showToast('Aufnahme konnte nicht entfernt werden.'))
+          }
+        }
+        for (const recording of projectRecordings) {
+          registerRecording(recording.id, recording.blob)
+          if (!previousIds.has(recording.id) && !memoryOnly.current) {
+            void saveRecording(recording).catch(() => showToast('Aufnahme konnte nicht gespeichert werden.'))
+          }
+        }
+        const nextProject = { ...project, clips, updatedAt: Date.now() }
+        const recordings = [
+          ...recordingsRef.current.filter((recording) => recording.projectId !== projectId),
+          ...projectRecordings,
+        ]
+        projectsRef.current = projectsRef.current.map((item) => (item.id === projectId ? nextProject : item))
+        recordingsRef.current = recordings
+        dispatch({ type: 'apply-editor', project: nextProject, recordings })
+        persist(nextProject)
+      },
+      restoreBackup: async (projects, recordings) => {
+        for (const recording of recordingsRef.current) forgetRecording(recording.id)
+        for (const recording of recordings) registerRecording(recording.id, recording.blob)
+        projectsRef.current = projects
+        recordingsRef.current = recordings
+        dispatch({ type: 'restore', projects, recordings })
+        if (memoryOnly.current) return
+        try {
+          await replaceDatabase(projects, recordings)
+        } catch {
+          showToast('Sicherung konnte nicht gespeichert werden.')
+        }
+      },
       showToast,
-      unlockParent: () => dispatch({ type: 'unlock' }),
     }
     // state fields are the render inputs; refs read the latest projects inside callbacks.
     // eslint-disable-next-line react-hooks/exhaustive-deps

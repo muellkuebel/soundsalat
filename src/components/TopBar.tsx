@@ -1,6 +1,5 @@
 import { formatClock } from '../lib/time.ts'
-import { IconButton } from './ui-icons.tsx'
-import { UiIcon } from './ui-icons.tsx'
+import { IconButton, UiIcon } from './ui-icons.tsx'
 
 export function TopBar({
   time,
@@ -9,10 +8,15 @@ export function TopBar({
   idle,
   volume,
   locked,
+  canUndo,
+  canRedo,
   onHome,
+  onUndo,
+  onRedo,
   onExport,
   onStop,
   onTogglePlay,
+  onVolumeStart,
   onVolume,
   onPreview,
   onDuplicate,
@@ -26,10 +30,15 @@ export function TopBar({
   idle: boolean
   volume: number
   locked: boolean
+  canUndo: boolean
+  canRedo: boolean
   onHome: () => void
+  onUndo: () => void
+  onRedo: () => void
   onExport: () => void
   onStop: () => void
   onTogglePlay: () => void
+  onVolumeStart: () => void
   onVolume: (value: number) => void
   onPreview: () => void
   onDuplicate: () => void
@@ -40,13 +49,28 @@ export function TopBar({
   return (
     <header className="topbar">
       <div className="top-left">
-        <IconButton label="Zur Übersicht" name="home" tone="light" onClick={onHome} />
-        <IconButton label="Teilen" name="share" tone="dark" onClick={onExport} />
-        <IconButton label="Stopp" name="stop" tone="dark" onClick={onStop} />
-        <IconButton label={playing ? 'Pause' : 'Abspielen'} name={playing ? 'pause' : 'play'} tone="dark" onClick={onTogglePlay} />
+        <button type="button" className="menu-btn" aria-label="Menü" onClick={onHome}>
+          <UiIcon name="home" />
+          <span>Menü</span>
+        </button>
+        <IconButton label="Rückgängig" name="undo" tone="light" disabled={!canUndo} onClick={onUndo} />
+        <IconButton label="Wiederholen" name="redo" tone="light" disabled={!canRedo} onClick={onRedo} />
+        <button type="button" className="transport stop" aria-label="Stopp" onClick={onStop}>
+          <UiIcon name="stop" />
+        </button>
+        <button
+          type="button"
+          className={`transport ${playing ? 'pause' : 'play'}`}
+          aria-label={playing ? 'Pause' : 'Abspielen'}
+          data-transport={playing ? 'pause' : 'play'}
+          onClick={onTogglePlay}
+        >
+          <UiIcon name={playing ? 'pause' : 'play'} />
+        </button>
         <div className="top-time" data-time={formatClock(time)}>
           {formatClock(time)}
         </div>
+        <IconButton label="Teilen" name="share" tone="dark" onClick={onExport} />
       </div>
       <div className={`top-right ${idle ? 'idle' : ''}`} style={idle ? undefined : { background: color }}>
         <label className="vol">
@@ -60,6 +84,8 @@ export function TopBar({
             value={volume}
             aria-label="Lautstärke"
             disabled={idle}
+            onPointerDown={onVolumeStart}
+            onKeyDown={onVolumeStart}
             onChange={(event) => onVolume(Number(event.target.value))}
           />
         </label>

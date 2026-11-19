@@ -79,7 +79,7 @@ Chrome and Samsung Internet install the PWA from the manifest: name **Soundsalat
 3. On the tablet, open `https://<computer-ip>:43123/soundsalat/`. The published app is [https://muellkuebel.github.io/soundsalat/](https://muellkuebel.github.io/soundsalat/).
 4. Accept the certificate warning (Advanced, then proceed). Allow the microphone when asked.
 5. Install:
-   - **Chrome:** menu, then **Install app** or **Add to Home screen**. If the item is missing, use the app for a moment and open the menu again. The Eltern area also shows **App installieren** when Chrome fires the install event.
+   - **Chrome:** menu, then **Install app** or **Add to Home screen**. If the item is missing, use the app for a moment and open the menu again. Einstellungen also shows **App installieren** when Chrome fires the install event.
    - **Samsung Internet:** menu, **Add page to**, **Home screen**, or **Install**.
 6. Open Soundsalat from the home screen. Android should open it standalone and prefer landscape.
 
@@ -87,12 +87,13 @@ On the computer itself, `http://127.0.0.1:43123/soundsalat/` is a secure context
 
 ## How to play
 
-- **Für Eltern** asks a short addition question, then lists projects to rename or delete. A long-press on a card opens the same rename and delete actions. Deleting asks the question first.
+- **Einstellungen** lists projects to rename or delete, and can save or load one backup file with every project and recording. A long-press on a card opens rename and delete. A fresh install shows only the **+** card.
 - Tap **+** to start a project, pick a picture, and name it.
-- The bottom domes are sound trays. Drag a sound up onto a lane, or tap it to drop it at the playhead.
+- The bottom domes are sound trays. Tap a tile to hear it, tap again to stop. Drag it onto a lane, or tap **+** on the playing tile to drop it at the playhead.
+- **Menü** leaves the editor. **Rückgängig** and **Wiederholen** step through timeline edits. Play is green, pause is yellow, stop is red.
 - Tap a clip to select it. The top bar takes its color: volume, preview, duplicate, lock, trim, delete.
 - Drag clips between the four lanes. Drag the playhead to move through the story. The strip above the lanes is an overview.
-- The red microphone dome records. The level meter moves while you record. The check mark saves the take into the microphone tray and onto the timeline.
+- The red microphone dome records. Tap once to start and again to stop. The take is placed at the playhead and kept in the microphone tray. The level meter and time stay visible while you record.
 - The scissors open the trim view. Drag the pink handles, then confirm. Trimming only stores start and end offsets.
 - The share button mixes every lane and exports a WAV file. It uses the system share sheet when the browser can share files, and otherwise downloads the file.
 

@@ -5,29 +5,32 @@ import { useStore } from '../store.tsx'
 import type { CategoryId, RecordingRecord } from '../types.ts'
 import { Illustration } from './illustrations.tsx'
 import { RecordPanel } from './RecordPanel.tsx'
+import { SoundIcon } from './SoundIcon.tsx'
+import { UiIcon } from './ui-icons.tsx'
 
 export function Dock({
   category,
   recordings,
+  auditionId,
   onCategory,
   onChipDown,
+  onAdd,
   onSaveRecording,
-  onPreviewBuffer,
   onEngageRecord,
 }: {
   category: CategoryId | null
   recordings: RecordingRecord[]
+  auditionId: string | null
   onCategory: (id: CategoryId) => void
   onChipDown: (event: ReactPointerEvent, soundId: string, duration: number) => void
+  onAdd: (soundId: string, duration: number) => void
   onSaveRecording: (blob: Blob, buffer: AudioBuffer) => void
-  onPreviewBuffer: (buffer: AudioBuffer) => void
   onEngageRecord: () => void
 }) {
   const active = CATEGORIES.find((item) => item.id === category)
-  const background =
-    category === 'mic' ? '#e23d3d' : active ? active.color : 'rgba(255,255,255,.78)'
+  const background = category === 'mic' ? '#e23d3d' : active ? active.color : 'transparent'
   return (
-    <div className="dock" style={{ background }}>
+    <div className="dock">
       <div className="cats">
         {CATEGORIES.map((item) => (
           <button
@@ -44,14 +47,17 @@ export function Dock({
           </button>
         ))}
       </div>
-      <Tray category={category} recordings={recordings} onChipDown={onChipDown} />
-      {category === 'mic' ? (
-        <RecordPanel
-          onSave={onSaveRecording}
-          onClose={() => onCategory('mic')}
-          onPreview={onPreviewBuffer}
-          onEngage={onEngageRecord}
-        />
+      {category ? (
+        <div className="tray-panel" style={{ background }} data-tray-panel={category}>
+          <Tray
+            category={category}
+            recordings={recordings}
+            auditionId={auditionId}
+            onChipDown={onChipDown}
+            onAdd={onAdd}
+          />
+          {category === 'mic' ? <RecordPanel onSave={onSaveRecording} onEngage={onEngageRecord} /> : null}
+        </div>
       ) : null}
     </div>
   )
@@ -60,42 +66,68 @@ export function Dock({
 function Tray({
   category,
   recordings,
+  auditionId,
   onChipDown,
+  onAdd,
 }: {
-  category: CategoryId | null
+  category: CategoryId
   recordings: RecordingRecord[]
+  auditionId: string | null
   onChipDown: (event: ReactPointerEvent, soundId: string, duration: number) => void
+  onAdd: (soundId: string, duration: number) => void
 }) {
   const { sounds } = useStore()
-  if (!category) return null
   const items =
     category === 'mic'
       ? recordings.map((recording) => ({
           id: `rec:${recording.id}`,
           name: recording.name,
-          icon: 'mic' as const,
           duration: recording.duration,
         }))
-      : sounds.filter((sound) => sound.category === category)
-  if (items.length === 0) return null
+      : sounds
+          .filter((sound) => sound.category === category)
+          .map((sound) => ({ id: sound.id, name: sound.name, duration: sound.duration }))
+  if (items.length === 0 && category !== 'mic') return null
   return (
     <div className="tray" data-tray={category}>
+      {items.length === 0 ? <p className="tray-empty">Noch keine Aufnahme</p> : null}
+      {items.length === 0 ? null : (
       <div className="tray-scroll">
-        {items.map((item) => (
-          <button
-            type="button"
-            key={item.id}
-            className="chip"
-            aria-label={`${item.name}, ${formatClock(item.duration)}`}
-            onPointerDown={(event) => onChipDown(event, item.id, item.duration)}
-          >
-            <span className="chip-icon">
-              <Illustration name={item.icon} />
-            </span>
-            <span className="chip-time">{formatClock(item.duration)}</span>
-          </button>
-        ))}
+        {items.map((item) => {
+          const playing = auditionId === item.id
+          return (
+            <div key={item.id} className={`chip ${playing ? 'playing' : ''}`} data-sound={item.id}>
+              <button
+                type="button"
+                className="chip-hit"
+                aria-label={`${item.name}, ${formatClock(item.duration)}`}
+                aria-pressed={playing}
+                onPointerDown={(event) => onChipDown(event, item.id, item.duration)}
+              >
+                <span className="chip-icon">
+                  <SoundIcon id={item.id} />
+                </span>
+                <span className="chip-time">{formatClock(item.duration)}</span>
+              </button>
+              {playing ? (
+                <button
+                  type="button"
+                  className="chip-add"
+                  aria-label={`${item.name} hinzufügen`}
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    onAdd(item.id, item.duration)
+                  }}
+                >
+                  <UiIcon name="plus" />
+                </button>
+              ) : null}
+            </div>
+          )
+        })}
       </div>
+      )}
     </div>
   )
 }

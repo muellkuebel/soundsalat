@@ -87,3 +87,9 @@ If a file cannot be loaded, the app plays a short synthesized stand-in instead.
 | `skate-ollie` | Ollie | `public/sounds/skate/skate-ollie.mp3` | Kenney | CC0 1.0 Universal (public domain) | https://kenney.nl/assets/interface-sounds |
 
 Processed locally: silence trimmed, loudness normalized to about −16 LUFS, encoded as mono 64 kbps MP3.
+
+## Icons
+
+Sound tiles and timeline clips use colorful flat icons in `public/emoji/`.
+Most are from [Twemoji](https://github.com/twitter/twemoji) by Twitter, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+`princess-glocke.svg` and `princess-glanz.svg` are original drawings for this app so those two sounds do not share an icon with another clip.

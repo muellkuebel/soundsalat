@@ -3,7 +3,7 @@ import { appearance } from '../appearance.ts'
 import { GUTTER, LANES, PPS } from '../layout.ts'
 import { clipLength, formatClip } from '../lib/time.ts'
 import type { Clip } from '../types.ts'
-import { Illustration } from './illustrations.tsx'
+import { SoundIcon } from './SoundIcon.tsx'
 import { UiIcon } from './ui-icons.tsx'
 
 export function Timeline({
@@ -66,7 +66,7 @@ export function Timeline({
                       onPointerCancel={onClipPointerUp}
                     >
                       <span className="clip-badge">
-                        <Illustration name={look.icon} />
+                        <SoundIcon id={clip.soundId} />
                       </span>
                       {length * PPS > 78 ? <span className="clip-dur">{formatClip(length)}</span> : null}
                       {clip.locked ? (
@@ -102,7 +102,7 @@ export function Timeline({
             <UiIcon name="pause" />
           </button>
         </div>
-        {clips.length === 0 && !preview ? <div className="empty-hint">Zieh Töne nach oben</div> : null}
+        {clips.length === 0 && !preview ? <div className="empty-hint">Tippe einen Ton an oder zieh ihn nach oben</div> : null}
       </div>
     </div>
   )

@@ -7,9 +7,9 @@ import { getBuffer } from '../audio/library.ts'
 import { GUTTER, LANES, MIN_TIMELINE, PPS } from '../layout.ts'
 import { clipLength, projectDuration, safeFileBase, snapTime, uid } from '../lib/time.ts'
 import { useStore } from '../store.tsx'
-import type { CategoryId, Clip } from '../types.ts'
+import type { CategoryId, Clip, RecordingRecord } from '../types.ts'
 import { Dock } from './Dock.tsx'
-import { Illustration } from './illustrations.tsx'
+import { SoundIcon } from './SoundIcon.tsx'
 import { Minimap, Timeline } from './Timeline.tsx'
 import { TopBar } from './TopBar.tsx'
 import { TrimModal } from './TrimModal.tsx'
@@ -51,6 +51,15 @@ export function Editor({ projectId }: { projectId: string }) {
     null,
   )
   const [moveOverride, setMoveOverride] = useState<{ id: string; startTime: number; lane: number } | null>(null)
+  const [auditionId, setAuditionId] = useState<string | null>(null)
+  const [historyNav, setHistoryNav] = useState({ undo: 0, redo: 0 })
+  const past = useRef<{ clips: Clip[]; recordings: RecordingRecord[] }[]>([])
+  const future = useRef<{ clips: Clip[]; recordings: RecordingRecord[] }[]>([])
+  const volumeMark = useRef(false)
+  const auditionToken = useRef(0)
+  const undoRef = useRef<() => void>(() => {})
+  const redoRef = useRef<() => void>(() => {})
+  const rememberRef = useRef<() => void>(() => {})
   const scrollRef = useRef<HTMLDivElement>(null)
   const playheadRef = useRef(0)
   const playingRef = useRef(false)
@@ -108,6 +117,8 @@ export function Editor({ projectId }: { projectId: string }) {
     playingRef.current = true
     setPlaying(true)
     setTime(from)
+    auditionToken.current += 1
+    setAuditionId(null)
     engine.play(items, from, end)
   }
 
@@ -153,10 +164,18 @@ export function Editor({ projectId }: { projectId: string }) {
       } else if (event.key === 'Escape') {
         setTrim(null)
         setCategory(null)
+      } else if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
+        event.preventDefault()
+        if (event.shiftKey) redoRef.current()
+        else undoRef.current()
+      } else if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'y') {
+        event.preventDefault()
+        redoRef.current()
       } else if (event.key === 'Delete' || event.key === 'Backspace') {
         const current = projectRef.current
         const clip = current?.clips.find((item) => item.id === selectedRef.current)
         if (current && clip && !clip.locked) {
+          rememberRef.current()
           storeRef.current.removeClip(current.id, clip.id)
           setSelectedId(null)
         }
@@ -172,6 +191,66 @@ export function Editor({ projectId }: { projectId: string }) {
     // Keyboard and transport stay bound for the lifetime of the editor.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  function syncHistory() {
+    setHistoryNav({ undo: past.current.length, redo: future.current.length })
+  }
+
+  function capture() {
+    const current = projectRef.current
+    return {
+      clips: current ? current.clips.map((clip) => ({ ...clip })) : [],
+      recordings: storeRef.current.recordings
+        .filter((recording) => recording.projectId === current?.id)
+        .map((recording) => ({ ...recording })),
+    }
+  }
+
+  function remember() {
+    past.current.push(capture())
+    if (past.current.length > 50) past.current.shift()
+    future.current = []
+    syncHistory()
+  }
+
+  function restore(snapshot: { clips: Clip[]; recordings: RecordingRecord[] }) {
+    const current = projectRef.current
+    if (!current) return
+    getEngine().stop()
+    playingRef.current = false
+    setPlaying(false)
+    auditionToken.current += 1
+    setAuditionId(null)
+    storeRef.current.applyEditorSnapshot(current.id, snapshot.clips, snapshot.recordings)
+    setSelectedId(null)
+  }
+
+  function undo() {
+    const snapshot = past.current.pop()
+    if (!snapshot) return
+    future.current.push(capture())
+    restore(snapshot)
+    syncHistory()
+  }
+
+  function redo() {
+    const snapshot = future.current.pop()
+    if (!snapshot) return
+    past.current.push(capture())
+    restore(snapshot)
+    syncHistory()
+  }
+
+  undoRef.current = undo
+  redoRef.current = redo
+  rememberRef.current = remember
+
+  useEffect(() => {
+    past.current = []
+    future.current = []
+    setHistoryNav({ undo: 0, redo: 0 })
+    setAuditionId(null)
+  }, [projectId])
 
   useEffect(() => {
     const element = scrollRef.current
@@ -209,9 +288,10 @@ export function Editor({ projectId }: { projectId: string }) {
     return { over, time: Math.max(0, x / PPS), lane }
   }
 
-  async function place(soundId: string, lane: number, start: number) {
+  async function place(soundId: string, lane: number, start: number, history = true) {
     try {
       const buffer = await getBuffer(soundId)
+      if (history) remember()
       const clip: Clip = {
         id: uid(),
         soundId,
@@ -224,8 +304,34 @@ export function Editor({ projectId }: { projectId: string }) {
       }
       store.addClip(story.id, clip)
       setSelectedId(clip.id)
+      auditionToken.current += 1
+      getEngine().stopPreview()
+      setAuditionId(null)
     } catch {
       store.showToast('Ton konnte nicht geladen werden.')
+    }
+  }
+
+  async function audition(soundId: string) {
+    const engine = getEngine()
+    if (auditionId === soundId) {
+      auditionToken.current += 1
+      engine.stopPreview()
+      setAuditionId(null)
+      return
+    }
+    const token = ++auditionToken.current
+    try {
+      engine.unlock()
+      const buffer = await getBuffer(soundId)
+      if (token !== auditionToken.current) return
+      setAuditionId(soundId)
+      engine.preview(buffer, 0, buffer.duration, 1, () => {
+        if (token !== auditionToken.current) return
+        setAuditionId((current) => (current === soundId ? null : current))
+      })
+    } catch {
+      if (token === auditionToken.current) store.showToast('Ton konnte nicht geladen werden.')
     }
   }
 
@@ -267,9 +373,8 @@ export function Editor({ projectId }: { projectId: string }) {
       setGhost(null)
       setPreview(null)
       if (scrolling) return
-      const current = projectRef.current?.clips ?? []
       if (!moved) {
-        void place(soundId, freeLane(current, playheadRef.current, durationHint), playheadRef.current)
+        void audition(soundId)
         return
       }
       if (drop.over) void place(soundId, drop.lane, drop.time)
@@ -318,6 +423,7 @@ export function Editor({ projectId }: { projectId: string }) {
     if (drag.moved) {
       const dx = event.clientX - drag.startX
       const hit = locate(event.clientX, event.clientY)
+      remember()
       store.updateClip(story.id, drag.clipId, {
         startTime: snapTime(Math.max(0, drag.originStart + dx / PPS)),
         lane: hit ? hit.lane : drag.originLane,
@@ -399,21 +505,41 @@ export function Editor({ projectId }: { projectId: string }) {
         idle={!selected}
         volume={selected?.volume ?? 1}
         locked={Boolean(selected?.locked)}
+        canUndo={historyNav.undo > 0}
+        canRedo={historyNav.redo > 0}
         onHome={() => {
           stopAll()
           store.goHome()
         }}
+        onUndo={undo}
+        onRedo={redo}
         onExport={() => void exportMix()}
         onStop={stopAll}
         onTogglePlay={togglePlay}
+        onVolumeStart={() => {
+          if (volumeMark.current || !selected) return
+          volumeMark.current = true
+          remember()
+          window.setTimeout(() => {
+            volumeMark.current = false
+          }, 700)
+        }}
         onVolume={(value) => {
           if (!selected) return
+          if (!volumeMark.current) {
+            volumeMark.current = true
+            remember()
+            window.setTimeout(() => {
+              volumeMark.current = false
+            }, 700)
+          }
           store.updateClip(story.id, selected.id, { volume: value })
           getEngine().setClipVolume(selected.id, value)
         }}
         onPreview={() => void previewSelected()}
         onDuplicate={() => {
           if (!selected) return
+          remember()
           const copy: Clip = {
             ...selected,
             id: uid(),
@@ -425,11 +551,13 @@ export function Editor({ projectId }: { projectId: string }) {
         }}
         onLock={() => {
           if (!selected) return
+          remember()
           store.updateClip(story.id, selected.id, { locked: !selected.locked })
         }}
         onTrim={() => void openTrim()}
         onDelete={() => {
           if (!selected || selected.locked) return
+          remember()
           store.removeClip(story.id, selected.id)
           setSelectedId(null)
         }}
@@ -469,15 +597,21 @@ export function Editor({ projectId }: { projectId: string }) {
       <Dock
         category={category}
         recordings={recordings}
-        onCategory={(id) => setCategory((current) => (current === id ? null : id))}
-        onChipDown={onChipDown}
-        onEngageRecord={pause}
-        onPreviewBuffer={(buffer) => {
-          pause()
-          getEngine().unlock()
-          getEngine().preview(buffer, 0, buffer.duration, 1)
+        auditionId={auditionId}
+        onCategory={(id) => {
+          auditionToken.current += 1
+          getEngine().stopPreview()
+          setAuditionId(null)
+          setCategory((current) => (current === id ? null : id))
         }}
+        onChipDown={onChipDown}
+        onAdd={(soundId, durationHint) => {
+          const lane = freeLane(projectRef.current?.clips ?? [], playheadRef.current, durationHint)
+          void place(soundId, lane, playheadRef.current)
+        }}
+        onEngageRecord={pause}
         onSaveRecording={(blob, buffer) => {
+          remember()
           const count = recordings.length + 1
           const id = uid()
           store.addRecording(
@@ -491,13 +625,25 @@ export function Editor({ projectId }: { projectId: string }) {
             },
             buffer,
           )
-          void place(`rec:${id}`, freeLane(story.clips, playheadRef.current, buffer.duration), playheadRef.current)
+          const clip: Clip = {
+            id: uid(),
+            soundId: `rec:${id}`,
+            lane: freeLane(story.clips, playheadRef.current, buffer.duration),
+            startTime: snapTime(playheadRef.current),
+            trimStart: 0,
+            trimEnd: buffer.duration,
+            volume: 1,
+            locked: false,
+          }
+          store.addClip(story.id, clip)
+          setSelectedId(clip.id)
+          setCategory(null)
         }}
       />
       {ghost && ghostLook ? (
         <div className="drag-ghost" style={{ left: ghost.x, top: ghost.y, background: ghostLook.color }}>
           <span className="clip-badge">
-            <Illustration name={ghostLook.icon} />
+            <SoundIcon id={ghost.soundId} />
           </span>
           <span>{ghostLook.name}</span>
         </div>
@@ -509,6 +655,7 @@ export function Editor({ projectId }: { projectId: string }) {
           trimEnd={trim.clip.trimEnd}
           onClose={() => setTrim(null)}
           onSave={(start, end) => {
+            remember()
             store.updateClip(story.id, trim.clip.id, { trimStart: start, trimEnd: end })
             setTrim(null)
           }}

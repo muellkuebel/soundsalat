@@ -73,6 +73,12 @@ const icons = {
       <path d="M18 13a6.5 6.5 0 1 0 1.2 3.5" {...common} />
     </>
   ),
+  undo: (
+    <>
+      <path d="M9 7 4 12l5 5" {...common} />
+      <path d="M4 12h11.5a4.5 4.5 0 1 1 0 9H13" {...common} />
+    </>
+  ),
   speaker: (
     <>
       <path d="M4 10h3l4-3v10l-4-3H4v-4Z" fill="currentColor" />

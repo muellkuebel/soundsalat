@@ -12,7 +12,7 @@
   "display_override": ["standalone", "fullscreen"],
   "orientation": "landscape",
   "background_color": "#f4f8ef",
-  "theme_color": "#2f7a34",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "/soundsalat/icons/icon-192.png",

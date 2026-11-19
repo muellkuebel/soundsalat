@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { getEngine } from '../audio/engine.ts'
 import { formatClock } from '../lib/time.ts'
-import { IconButton } from './ui-icons.tsx'
 
 const MAX_SECONDS = 45
 
@@ -13,27 +12,21 @@ function pickMime() {
 
 export function RecordPanel({
   onSave,
-  onClose,
-  onPreview,
   onEngage,
 }: {
   onSave: (blob: Blob, buffer: AudioBuffer) => void
-  onClose: () => void
-  onPreview: (buffer: AudioBuffer) => void
   onEngage: () => void
 }) {
-  const [phase, setPhase] = useState<'idle' | 'recording' | 'review'>('idle')
+  const [phase, setPhase] = useState<'idle' | 'recording'>('idle')
   const [seconds, setSeconds] = useState(0)
   const [level, setLevel] = useState(0)
   const [error, setError] = useState('')
-  const [takeReady, setTakeReady] = useState(false)
-  const blobRef = useRef<Blob | null>(null)
-  const bufferRef = useRef<AudioBuffer | null>(null)
   const recRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const chunksRef = useRef<Blob[]>([])
   const startedRef = useRef(0)
   const rafRef = useRef(0)
+  const savingRef = useRef(false)
 
   useEffect(() => {
     return () => {
@@ -48,6 +41,11 @@ export function RecordPanel({
     setLevel(0)
   }
 
+  function stopStream() {
+    streamRef.current?.getTracks().forEach((track) => track.stop())
+    streamRef.current = null
+  }
+
   function watch(analyser: AnalyserNode) {
     const data = new Uint8Array(analyser.fftSize)
     const tick = () => {
@@ -58,9 +56,10 @@ export function RecordPanel({
         sum += value * value
       }
       setLevel(Math.min(1, Math.sqrt(sum / data.length) * 4.2))
-      setSeconds((performance.now() - startedRef.current) / 1000)
-      if ((performance.now() - startedRef.current) / 1000 >= MAX_SECONDS) {
-        void finishRecording()
+      const elapsed = (performance.now() - startedRef.current) / 1000
+      setSeconds(elapsed)
+      if (elapsed >= MAX_SECONDS) {
+        void stopAndSave()
         return
       }
       rafRef.current = requestAnimationFrame(tick)
@@ -107,31 +106,24 @@ export function RecordPanel({
     }
   }
 
-  function stopStream() {
-    streamRef.current?.getTracks().forEach((track) => track.stop())
-    streamRef.current = null
-  }
-
-  function finishRecording() {
+  function stopAndSave() {
     const recorder = recRef.current
-    if (!recorder || recorder.state === 'inactive') return Promise.resolve()
+    if (!recorder || recorder.state === 'inactive' || savingRef.current) return Promise.resolve()
+    savingRef.current = true
     stopMeter()
+    setPhase('idle')
     return new Promise<void>((resolve) => {
       recorder.onstop = () => {
         const type = recorder.mimeType || chunksRef.current[0]?.type || 'audio/webm'
         const blob = new Blob(chunksRef.current, { type })
-        blobRef.current = blob
         stopStream()
         void blob.arrayBuffer().then(async (raw) => {
           try {
             const buffer = await getEngine().ctx.decodeAudioData(raw.slice(0))
-            bufferRef.current = buffer
-            setSeconds(buffer.duration)
-            setTakeReady(true)
-            setPhase('review')
+            onSave(blob, buffer)
           } catch {
             setError('Die Aufnahme konnte nicht gelesen werden.')
-            setPhase('idle')
+            savingRef.current = false
           }
           resolve()
         })
@@ -145,18 +137,6 @@ export function RecordPanel({
     })
   }
 
-  function resetTake() {
-    stopMeter()
-    if (recRef.current && recRef.current.state === 'recording') recRef.current.stop()
-    stopStream()
-    blobRef.current = null
-    bufferRef.current = null
-    setTakeReady(false)
-    setSeconds(0)
-    setPhase('idle')
-    setError('')
-  }
-
   return (
     <div className="record-panel" data-panel="record">
       {error ? <p className="rec-error">{error}</p> : null}
@@ -165,58 +145,22 @@ export function RecordPanel({
           type="button"
           className={`rec-btn ${phase === 'recording' ? 'recording' : ''}`}
           aria-label={phase === 'recording' ? 'Stopp' : 'Aufnehmen'}
+          data-record-phase={phase}
           onClick={() => {
-            if (phase === 'recording') void finishRecording()
-            else {
-              resetTake()
-              void startRecording()
-            }
+            if (phase === 'recording') void stopAndSave()
+            else void startRecording()
           }}
         >
           <span />
         </button>
-        <IconButton
-          label="Anhören"
-          name="play"
-          tone="light"
-          disabled={phase !== 'review' || !takeReady}
-          onClick={() => {
-            if (bufferRef.current) onPreview(bufferRef.current)
-          }}
-        />
-        <IconButton label="Nochmal" name="redo" tone="light" disabled={phase === 'idle'} onClick={resetTake} />
         <div className="meter" aria-hidden="true">
           {[0.35, 0.55, 0.9, 1, 0.7, 0.42].map((height, index) => (
             <i key={index} style={{ height: `${height * 100}%`, opacity: level > index / 6 ? 1 : 0.28 }} />
           ))}
         </div>
-        <div className="time-pill">{formatClock(seconds)}</div>
-        <IconButton
-          label="Fertig"
-          name="check"
-          tone="light"
-          disabled={phase === 'idle'}
-          onClick={() => {
-            if (phase === 'recording') {
-              void finishRecording().then(() => {
-                const blob = blobRef.current
-                const buffer = bufferRef.current
-                if (blob && buffer) {
-                  onSave(blob, buffer)
-                  resetTake()
-                }
-              })
-              return
-            }
-            const blob = blobRef.current
-            const buffer = bufferRef.current
-            if (blob && buffer) {
-              onSave(blob, buffer)
-              resetTake()
-            }
-          }}
-        />
-        <IconButton label="Abbrechen" name="close" tone="light" onClick={() => { resetTake(); onClose() }} />
+        <div className="time-pill" data-record-time>
+          {formatClock(seconds)}
+        </div>
       </div>
     </div>
   )

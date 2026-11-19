@@ -1,4 +1,4 @@
-const CACHE = 'soundsalat-v3'
+const CACHE = 'soundsalat-v4'
 const BASE = '/soundsalat/'
 
 function withBase(path) {
@@ -30,8 +30,10 @@ self.addEventListener('install', (event) => {
         const manifest = await fetch(withBase('sounds/manifest.json'))
         if (manifest.ok) {
           const data = await manifest.json()
+          urls.push(withBase('emoji/mic.svg'))
           for (const clip of data.clips || []) {
             if (clip && typeof clip.file === 'string') urls.push(withBase('sounds/' + clip.file.replace(/^\/+/, '')))
+            if (clip && typeof clip.id === 'string') urls.push(withBase('emoji/' + clip.id + '.svg'))
           }
         }
       } catch {
