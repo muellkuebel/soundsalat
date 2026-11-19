@@ -1,18 +1,13 @@
 export function SaladMark({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 120 90" aria-hidden="true">
-      <g className="note-pop">
-        <path d="M78 18v22" stroke="#243024" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="72" cy="40" r="6" fill="#243024" />
-        <path d="M92 10v18" stroke="#243024" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="86" cy="28" r="5" fill="#e23d3d" />
+    <svg className={className} viewBox="0 0 512 512" aria-hidden="true">
+      <path fill="#3e9d48" d="M256 58c34 36 78 40 118 78 42 40 78 96 70 162-8 70-58 128-112 156-22 12-40 40-76 58-36-18-54-46-76-58-54-28-104-86-112-156-8-66 28-122 70-162 40-38 84-42 118-78z" />
+      <path fill="none" stroke="#2c7a38" strokeWidth="18" strokeLinecap="round" d="M256 108c-6 78-4 168 2 292" />
+      <g fill="#f7fbf4">
+        <ellipse cx="236" cy="312" rx="58" ry="40" transform="rotate(-26 236 312)" />
+        <rect x="278" y="146" width="22" height="162" rx="8" />
       </g>
-      <path d="M34 30c6-16 22-18 28-8 6-8 18-8 24 2 10 2 16 10 14 18" fill="#8bc34a" stroke="#245c28" strokeWidth="3" strokeLinejoin="round" />
-      <path d="M22 46h76c-4 18-20 28-38 28S26 64 22 46Z" fill="#f4f8ef" stroke="#245c28" strokeWidth="3" />
-      <ellipse cx="46" cy="40" rx="10" ry="8" fill="#e23d3d" stroke="#8d2020" strokeWidth="2" />
-      <ellipse cx="66" cy="38" rx="11" ry="7" fill="#7cb342" stroke="#2f6b22" strokeWidth="2" />
-      <circle cx="58" cy="48" r="6" fill="#f2c014" stroke="#8a6a00" strokeWidth="2" />
-      <path d="M30 46h60" stroke="#245c28" strokeWidth="3" strokeLinecap="round" />
+      <path d="M300 154c62 20 78 66 36 104" fill="none" stroke="#f7fbf4" strokeWidth="20" strokeLinecap="round" />
     </svg>
   )
 }
