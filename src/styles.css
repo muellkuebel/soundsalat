@@ -103,7 +103,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lettuce-dee
   flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   align-content: start; gap: clamp(12px, 1.6vw, 24px);
-  padding: clamp(8px, 1.4vmin, 18px) clamp(16px, 2.4vw, 40px);
+  padding: clamp(8px, 1.4vmin, 18px) clamp(16px, 2.4vw, 40px) calc(16px + var(--safe-bottom));
 }
 @media (min-aspect-ratio: 3/2) {
   .home-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -139,12 +139,6 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lettuce-dee
   font-size: clamp(14px, 1.5vw, 18px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .card-dur { color: #777; font-size: clamp(13px, 1.3vw, 16px); }
-.home-sprouts {
-  flex: 0 0 auto;
-  display: flex; height: 22px; gap: clamp(8px, 1.4vw, 18px);
-  margin: 6px 8% calc(8px + var(--safe-bottom));
-}
-.home-sprouts span { flex: 1; border-radius: 12px 12px 0 0; }
 @media (max-height: 860px) {
   .logo-sound, .logo-salat { font-size: clamp(36px, 4.2vw, 56px); }
   .salad-mark { width: 78px; margin-bottom: -10px; }

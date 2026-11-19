@@ -71,13 +71,6 @@ export function Home() {
           />
         ))}
       </div>
-      <div className="home-sprouts" aria-hidden="true">
-        <span style={{ background: '#7cb342' }} />
-        <span style={{ background: '#f08a24' }} />
-        <span style={{ background: '#ee5a96' }} />
-        <span style={{ background: '#e6a80e' }} />
-        <span style={{ background: '#6a4cb3' }} />
-      </div>
       {dialog?.type === 'help' ? <HelpDialog onClose={() => setDialog(null)} /> : null}
       {dialog?.type === 'new' ? (
         <NewProjectDialog
