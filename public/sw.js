@@ -1,15 +1,25 @@
-const CACHE = 'soundsalat-v2'
+const CACHE = 'soundsalat-v3'
+const BASE = '/soundsalat/'
+
+function withBase(path) {
+  return BASE + String(path).replace(/^\/+/, '')
+}
+
 const PRECACHE = [
-  '/',
-  '/manifest.webmanifest',
-  '/favicon.svg',
-  '/doodle.svg',
-  '/sounds/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/icons/icon-maskable.png',
-  '/icons/apple-touch-icon.png',
+  BASE,
+  withBase('index.html'),
+  withBase('manifest.webmanifest'),
+  withBase('favicon.svg'),
+  withBase('sounds/manifest.json'),
+  withBase('icons/icon-192.png'),
+  withBase('icons/icon-512.png'),
+  withBase('icons/icon-maskable.png'),
+  withBase('icons/apple-touch-icon.png'),
 ]
+
+function inApp(url) {
+  return url.pathname === '/soundsalat' || url.pathname.startsWith(BASE)
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -17,13 +27,11 @@ self.addEventListener('install', (event) => {
       const cache = await caches.open(CACHE)
       let urls = [...PRECACHE]
       try {
-        const manifest = await fetch('/sounds/manifest.json')
+        const manifest = await fetch(withBase('sounds/manifest.json'))
         if (manifest.ok) {
           const data = await manifest.json()
           for (const clip of data.clips || []) {
-            if (clip && typeof clip.file === 'string') {
-              urls.push('/sounds/' + clip.file.replace(/^\/+/, ''))
-            }
+            if (clip && typeof clip.file === 'string') urls.push(withBase('sounds/' + clip.file.replace(/^\/+/, '')))
           }
         }
       } catch {
@@ -79,17 +87,20 @@ self.addEventListener('fetch', (event) => {
   const request = event.request
   if (request.method !== 'GET') return
   const url = new URL(request.url)
-  if (url.origin !== self.location.origin) return
+  if (url.origin !== self.location.origin || !inApp(url)) return
 
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => {
           const copy = response.clone()
-          caches.open(CACHE).then((cache) => cache.put('/', copy)).catch(() => {})
+          caches.open(CACHE).then((cache) => {
+            cache.put(request, copy).catch(() => {})
+            cache.put(BASE, response.clone()).catch(() => {})
+          })
           return response
         })
-        .catch(async () => (await caches.match(request)) || (await caches.match('/')) || Response.error()),
+        .catch(async () => (await caches.match(request)) || (await caches.match(BASE)) || (await caches.match(withBase('index.html'))) || Response.error()),
     )
     return
   }

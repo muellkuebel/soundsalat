@@ -2,6 +2,8 @@
 
 Soundsalat is a touch-first web app for children to build audio collages and little sound stories. The interface is in German. It is a landscape PWA for iPad (Safari) and Android tablets such as the Samsung Galaxy Tab (Chrome and Samsung Internet).
 
+The live app is [https://muellkuebel.github.io/soundsalat/](https://muellkuebel.github.io/soundsalat/). Pushes to `main` build and deploy there with GitHub Pages.
+
 Projects, clip edits, and microphone recordings stay in this browser (IndexedDB). Nothing is uploaded.
 
 ## Run it locally
@@ -11,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Open [http://127.0.0.1:43123](http://127.0.0.1:43123). The dev server listens on the local network as well.
+Open [http://127.0.0.1:43123/soundsalat/](http://127.0.0.1:43123/soundsalat/). The app is served under `/soundsalat/`, the same base path as GitHub Pages. The dev server listens on the local network as well.
 
 ```bash
 npm test
@@ -36,14 +38,14 @@ A short hint appears if the tablet is held in portrait.
 ## Install on an iPad
 
 1. Put the iPad and the computer on the same Wi-Fi.
-2. For a quick look, open `http://<computer-ip>:43123` in Safari.
+2. For a quick look, open `http://<computer-ip>:43123/soundsalat/` in Safari.
 3. Microphone recording needs a secure page. Safari on iOS only allows the microphone on HTTPS (localhost counts, but the iPad is not localhost). Start the server with a local certificate:
 
    ```bash
    npm run dev:https
    ```
 
-   Open `https://<computer-ip>:43123`. Safari warns about the certificate. Show the details and visit the site anyway, then allow the microphone.
+   Open `https://<computer-ip>:43123/soundsalat/`. Safari warns about the certificate. Show the details and visit the site anyway, then allow the microphone.
 4. To install: the Share button, then **Zum Home-Bildschirm**. The icon name is Soundsalat. Open it from the home screen in landscape.
 5. For an offline-capable install, build first so the service worker is active:
 
@@ -74,14 +76,14 @@ Chrome and Samsung Internet install the PWA from the manifest: name **Soundsalat
    HTTPS=1 npm run preview
    ```
 
-3. On the tablet, open `https://<computer-ip>:43123`.
+3. On the tablet, open `https://<computer-ip>:43123/soundsalat/`. The published app is [https://muellkuebel.github.io/soundsalat/](https://muellkuebel.github.io/soundsalat/).
 4. Accept the certificate warning (Advanced, then proceed). Allow the microphone when asked.
 5. Install:
    - **Chrome:** menu, then **Install app** or **Add to Home screen**. If the item is missing, use the app for a moment and open the menu again. The Eltern area also shows **App installieren** when Chrome fires the install event.
    - **Samsung Internet:** menu, **Add page to**, **Home screen**, or **Install**.
 6. Open Soundsalat from the home screen. Android should open it standalone and prefer landscape.
 
-On the computer itself, `http://127.0.0.1:43123` is a secure context, so the microphone works there without the HTTPS script.
+On the computer itself, `http://127.0.0.1:43123/soundsalat/` is a secure context, so the microphone works there without the HTTPS script.
 
 ## How to play
 

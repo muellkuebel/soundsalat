@@ -26,7 +26,7 @@ type ManifestClip = {
 
 export async function loadExtraSounds(): Promise<SoundItem[]> {
   try {
-    const response = await fetch('/sounds/manifest.json')
+    const response = await fetch(`${import.meta.env.BASE_URL}sounds/manifest.json`)
     if (!response.ok) return []
     const data = (await response.json()) as { clips?: ManifestClip[] }
     const extras: SoundItem[] = []
@@ -38,7 +38,7 @@ export async function loadExtraSounds(): Promise<SoundItem[]> {
         category: clip.category,
         icon: clip.icon && isIconName(clip.icon) ? clip.icon : 'music',
         duration: typeof clip.duration === 'number' && clip.duration > 0 ? clip.duration : 1,
-        file: `/sounds/${clip.file.replace(/^\/+/, '')}`,
+        file: `${import.meta.env.BASE_URL}sounds/${clip.file.replace(/^\/+/, '')}`,
         recipe: fallbackRecipe(clip.category),
       })
     }

@@ -46,7 +46,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lettuce-dee
 .app { height: 100%; position: relative; }
 .doodle {
   position: absolute; inset: 0; pointer-events: none;
-  background-image: url("/doodle.svg");
+  background-image: url("./doodle.svg");
   background-size: clamp(280px, 32vw, 420px);
   opacity: 0.55;
 }
