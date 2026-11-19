@@ -1,0 +1,578 @@
+import type { Recipe } from './recipes.ts'
+import type { IconName, ThemeId } from '../types.ts'
+
+export type SoundItem = {
+  id: string
+  name: string
+  category: ThemeId | 'mic'
+  icon: IconName
+  duration: number
+  recipe?: Recipe
+  file?: string
+}
+
+const C4 = 262
+const D4 = 294
+const E4 = 330
+const G4 = 392
+const A4 = 440
+const C5 = 523
+const D5 = 587
+const E5 = 659
+const G5 = 784
+const A5 = 880
+const C6 = 1047
+
+function mix(parts: Recipe[]): Recipe {
+  return { type: 'mix', parts }
+}
+
+function sound(
+  category: ThemeId,
+  slug: string,
+  name: string,
+  icon: IconName,
+  duration: number,
+  recipe: Recipe,
+): SoundItem {
+  return { id: `${category}-${slug}`, name, category, icon, duration, recipe }
+}
+
+export const BUILTIN_SOUNDS: SoundItem[] = [
+  sound('halloween', 'geist', 'Geist', 'ghost', 1.15, {
+    type: 'sweep',
+    from: 900,
+    to: 180,
+    dur: 1.0,
+    wave: 'sine',
+    gain: 0.28,
+    curve: 'exp',
+    filter: 1800,
+  }),
+  sound('halloween', 'fledermaus', 'Fledermaus', 'bat', 0.85, mix([
+    { type: 'sweep', from: 1800, to: 700, dur: 0.18, wave: 'square', gain: 0.08, filter: 2400 },
+    { type: 'sweep', from: 1600, to: 900, dur: 0.16, start: 0.28, wave: 'square', gain: 0.08, filter: 2400 },
+    { type: 'sweep', from: 1900, to: 600, dur: 0.2, start: 0.52, wave: 'square', gain: 0.08, filter: 2400 },
+  ])),
+  sound('halloween', 'knarren', 'Knarren', 'castle', 1.7, {
+    type: 'sweep',
+    from: 180,
+    to: 70,
+    dur: 1.5,
+    wave: 'sawtooth',
+    gain: 0.22,
+    curve: 'lin',
+    filter: 700,
+  }),
+  sound('halloween', 'donner', 'Donner', 'sparkle', 2.4, mix([
+    { type: 'noise', dur: 1.8, color: 'brown', filter: 240, gain: 0.7, attack: 0.02, release: 0.8 },
+    { type: 'noise', dur: 0.4, color: 'white', filter: 1800, filterType: 'highpass', gain: 0.25, attack: 0.001, release: 0.3 },
+  ])),
+  sound('halloween', 'eule', 'Eule', 'bird', 1.35, mix([
+    { type: 'tone', freq: 520, dur: 0.38, wave: 'sine', gain: 0.32, attack: 0.04, release: 0.12, vibrato: 5, vibratoDepth: 8 },
+    { type: 'tone', freq: 430, dur: 0.5, start: 0.55, wave: 'sine', gain: 0.3, attack: 0.04, release: 0.18, vibrato: 5, vibratoDepth: 7 },
+  ])),
+  sound('halloween', 'glocke', 'Glocke', 'bell', 1.6, mix([
+    { type: 'tone', freq: 784, dur: 1.45, wave: 'sine', gain: 0.32, attack: 0.002, release: 1.2 },
+    { type: 'tone', freq: 1176, dur: 1.0, wave: 'sine', gain: 0.14, attack: 0.002, release: 0.8 },
+  ])),
+  sound('halloween', 'spuk', 'Spuk', 'music', 2.3, {
+    type: 'melody',
+    notes: [E4, G4, A4, G4, E4, D4, C4],
+    bpm: 92,
+    wave: 'sine',
+    gain: 0.26,
+    note: 0.95,
+    filter: 1800,
+  }),
+  sound('halloween', 'zauber', 'Zauber', 'sparkle', 1.15, {
+    type: 'melody',
+    notes: [C6, G5, C6, A5, E5],
+    bpm: 220,
+    wave: 'sine',
+    gain: 0.22,
+    note: 0.45,
+  }),
+
+  sound('castle', 'fanfare', 'Fanfare', 'music', 1.5, mix([
+    { type: 'tone', freq: C4, dur: 1.3, wave: 'sawtooth', gain: 0.12, filter: 1400, attack: 0.03, release: 0.2 },
+    { type: 'tone', freq: E4, dur: 1.3, wave: 'sawtooth', gain: 0.12, filter: 1400, attack: 0.03, release: 0.2 },
+    { type: 'tone', freq: G4, dur: 1.3, wave: 'triangle', gain: 0.18, filter: 1800, attack: 0.02, release: 0.25 },
+    { type: 'tone', freq: C5, dur: 1.3, wave: 'triangle', gain: 0.16, attack: 0.02, release: 0.3 },
+  ])),
+  sound('castle', 'schwert', 'Schwert', 'sword', 0.55, mix([
+    { type: 'noise', dur: 0.18, filter: 2800, filterType: 'highpass', gain: 0.35, attack: 0.001, release: 0.12 },
+    { type: 'tone', freq: 180, dur: 0.4, wave: 'sine', gain: 0.4, attack: 0.001, release: 0.3 },
+  ])),
+  sound('castle', 'galopp', 'Galopp', 'horse', 1.9, mix(
+    [0, 0.26, 0.58, 0.84, 1.16, 1.42].map((start, index) => ({
+      type: 'noise' as const,
+      dur: 0.1,
+      start,
+      gain: index % 2 === 0 ? 0.42 : 0.28,
+      filter: 420,
+      filterType: 'lowpass' as const,
+      attack: 0.002,
+      release: 0.07,
+    })),
+  )),
+  sound('castle', 'tor', 'Tor', 'castle', 1.5, {
+    type: 'sweep',
+    from: 140,
+    to: 55,
+    dur: 1.3,
+    wave: 'sawtooth',
+    gain: 0.28,
+    curve: 'exp',
+    filter: 500,
+  }),
+  sound('castle', 'horn', 'Horn', 'bell', 1.15, {
+    type: 'tone',
+    freq: 220,
+    dur: 1.0,
+    wave: 'sawtooth',
+    gain: 0.2,
+    filter: 900,
+    attack: 0.05,
+    release: 0.25,
+    vibrato: 5,
+    vibratoDepth: 4,
+  }),
+  sound('castle', 'schritte', 'Schritte', 'drum', 1.7, mix(
+    [0, 0.42, 0.84, 1.26].map((start) => ({
+      type: 'sweep' as const,
+      from: 160,
+      to: 50,
+      dur: 0.22,
+      start,
+      wave: 'sine' as const,
+      gain: 0.55,
+      curve: 'exp' as const,
+    })),
+  )),
+  sound('castle', 'schild', 'Schild', 'sword', 0.6, mix([
+    { type: 'noise', dur: 0.12, filter: 1600, filterType: 'bandpass', q: 2, gain: 0.4, attack: 0.001, release: 0.08 },
+    { type: 'tone', freq: 140, dur: 0.45, wave: 'triangle', gain: 0.35, attack: 0.001, release: 0.3 },
+  ])),
+  sound('castle', 'trompete', 'Trompete', 'music', 2.15, {
+    type: 'melody',
+    notes: [C5, E5, G5, C5, G4, C5],
+    bpm: 120,
+    wave: 'sawtooth',
+    gain: 0.12,
+    filter: 1600,
+    note: 0.85,
+  }),
+
+  sound('fire', 'knistern', 'Knistern', 'flame', 3.2, { type: 'crackle', dur: 3.0, gap: 0.07, gain: 0.55 }),
+  sound('fire', 'flamme', 'Flamme', 'flame', 2.2, {
+    type: 'noise',
+    dur: 2.0,
+    color: 'brown',
+    filter: 700,
+    gain: 0.4,
+    attack: 0.2,
+    release: 0.4,
+  }),
+  sound('fire', 'funken', 'Funken', 'sparkle', 1.1, { type: 'crackle', dur: 0.95, gap: 0.12, gain: 0.35 }),
+  sound('fire', 'zischen', 'Zischen', 'flame', 1.05, {
+    type: 'noise',
+    dur: 0.9,
+    filter: 3200,
+    filterType: 'highpass',
+    gain: 0.22,
+    attack: 0.05,
+    release: 0.25,
+  }),
+  sound('fire', 'lagerfeuer', 'Lagerfeuer', 'flame', 4.2, mix([
+    { type: 'noise', dur: 4.0, color: 'brown', filter: 500, gain: 0.28, attack: 0.3, release: 0.5 },
+    { type: 'crackle', dur: 3.8, gap: 0.1, gain: 0.4 },
+  ])),
+  sound('fire', 'wusch', 'Wusch', 'sparkle', 0.7, {
+    type: 'sweep',
+    from: 400,
+    to: 1400,
+    dur: 0.55,
+    wave: 'sawtooth',
+    gain: 0.16,
+    filter: 2000,
+    curve: 'exp',
+  }),
+  sound('fire', 'glut', 'Glut', 'flame', 2.6, {
+    type: 'noise',
+    dur: 2.4,
+    color: 'brown',
+    filter: 280,
+    gain: 0.32,
+    attack: 0.4,
+    release: 0.6,
+  }),
+  sound('fire', 'prasseln', 'Prasseln', 'drum', 2.0, { type: 'crackle', dur: 1.8, gap: 0.05, gain: 0.48 }),
+
+  sound('princess', 'funkeln', 'Funkeln', 'sparkle', 1.25, {
+    type: 'melody',
+    notes: [C6, E5, G5, C6, A5, E5],
+    bpm: 260,
+    wave: 'sine',
+    gain: 0.2,
+    note: 0.4,
+  }),
+  sound('princess', 'harfe', 'Harfe', 'music', 3.4, {
+    type: 'melody',
+    notes: [E5, G5, C5, A4, D5, G4, C5],
+    bpm: 96,
+    wave: 'triangle',
+    gain: 0.3,
+    note: 0.7,
+  }),
+  sound('princess', 'stab', 'Zauberstab', 'sparkle', 0.85, mix([
+    { type: 'sweep', from: 600, to: 1800, dur: 0.45, wave: 'sine', gain: 0.22, curve: 'exp' },
+    { type: 'tone', freq: C6, dur: 0.55, start: 0.28, wave: 'sine', gain: 0.2, attack: 0.001, release: 0.4 },
+  ])),
+  sound('princess', 'walzer', 'Walzer', 'music', 3.6, {
+    type: 'melody',
+    notes: [E5, G5, C6, G5, E5, D5, C5, G4],
+    bpm: 112,
+    wave: 'triangle',
+    gain: 0.26,
+    note: 0.8,
+  }),
+  sound('princess', 'glocke', 'Glöckchen', 'bell', 1.4, mix([
+    { type: 'tone', freq: 1047, dur: 1.2, wave: 'sine', gain: 0.26, attack: 0.002, release: 1 },
+    { type: 'tone', freq: 1568, dur: 0.8, wave: 'sine', gain: 0.1, attack: 0.002, release: 0.7 },
+  ])),
+  sound('princess', 'fee', 'Fee', 'sparkle', 1.05, {
+    type: 'tone',
+    freq: 1400,
+    dur: 0.9,
+    wave: 'sine',
+    gain: 0.16,
+    vibrato: 8,
+    vibratoDepth: 30,
+    attack: 0.08,
+    release: 0.25,
+  }),
+  sound('princess', 'herz', 'Herz', 'heart', 1.2, {
+    type: 'melody',
+    notes: [E5, G5, C6],
+    bpm: 130,
+    wave: 'sine',
+    gain: 0.24,
+    note: 0.9,
+  }),
+  sound('princess', 'stern', 'Stern', 'stars', 1.5, mix([
+    { type: 'tone', freq: 1318, dur: 0.7, wave: 'sine', gain: 0.18, attack: 0.001, release: 0.55 },
+    { type: 'tone', freq: 1568, dur: 0.9, start: 0.25, wave: 'sine', gain: 0.14, attack: 0.001, release: 0.7 },
+  ])),
+
+  sound('football', 'pfeife', 'Pfeife', 'whistle', 0.95, {
+    type: 'tone',
+    freq: 1880,
+    dur: 0.8,
+    wave: 'sine',
+    gain: 0.22,
+    vibrato: 14,
+    vibratoDepth: 18,
+    attack: 0.04,
+    release: 0.08,
+  }),
+  sound('football', 'jubel', 'Jubel', 'stars', 1.7, {
+    type: 'noise',
+    dur: 1.5,
+    filter: 1600,
+    filterType: 'bandpass',
+    q: 0.6,
+    gain: 0.38,
+    attack: 0.05,
+    release: 0.4,
+  }),
+  sound('football', 'schuss', 'Schuss', 'ball', 0.5, mix([
+    { type: 'sweep', from: 200, to: 50, dur: 0.28, wave: 'sine', gain: 0.7, curve: 'exp' },
+    { type: 'noise', dur: 0.08, filter: 2000, filterType: 'highpass', gain: 0.3, attack: 0.001, release: 0.05 },
+  ])),
+  sound('football', 'trommel', 'Trommel', 'drum', 1.5, mix(
+    [0, 0.48, 0.96].map((start) => ({
+      type: 'mix' as const,
+      parts: [
+        { type: 'sweep' as const, from: 180, to: 55, dur: 0.3, start, wave: 'sine' as const, gain: 0.7, curve: 'exp' as const },
+        { type: 'noise' as const, dur: 0.05, start, filter: 2500, filterType: 'highpass' as const, gain: 0.25, attack: 0.001, release: 0.04 },
+      ],
+    })),
+  )),
+  sound('football', 'tor', 'Tor', 'bell', 1.15, {
+    type: 'tone',
+    freq: 440,
+    dur: 0.95,
+    wave: 'sawtooth',
+    gain: 0.16,
+    filter: 1200,
+    attack: 0.01,
+    release: 0.3,
+  }),
+  sound('football', 'anpfiff', 'Anpfiff', 'whistle', 1.35, mix([
+    { type: 'tone', freq: 1760, dur: 0.7, wave: 'sine', gain: 0.2, vibrato: 12, vibratoDepth: 16, attack: 0.03, release: 0.08 },
+    { type: 'sweep', from: 180, to: 60, dur: 0.25, start: 0.85, wave: 'sine', gain: 0.5, curve: 'exp' },
+  ])),
+  sound('football', 'pass', 'Pass', 'ball', 0.45, {
+    type: 'sweep',
+    from: 500,
+    to: 180,
+    dur: 0.32,
+    wave: 'triangle',
+    gain: 0.3,
+    curve: 'exp',
+  }),
+  sound('football', 'pfiff', 'Pfiff', 'whistle', 0.6, {
+    type: 'melody',
+    notes: [1760, 2093, 1760],
+    bpm: 300,
+    wave: 'sine',
+    gain: 0.16,
+    note: 0.7,
+  }),
+
+  sound('circus', 'wirbel', 'Wirbel', 'drum', 1.7, mix(
+    Array.from({ length: 12 }, (_, index) => ({
+      type: 'noise' as const,
+      dur: 0.045,
+      start: index * 0.12,
+      filter: 1800,
+      filterType: 'highpass' as const,
+      gain: 0.22 + (index / 12) * 0.2,
+      attack: 0.001,
+      release: 0.03,
+    })),
+  )),
+  sound('circus', 'hupe', 'Hupe', 'clown', 0.7, {
+    type: 'tone',
+    freq: 311,
+    dur: 0.55,
+    wave: 'sawtooth',
+    gain: 0.18,
+    filter: 1400,
+    attack: 0.01,
+    release: 0.12,
+    vibrato: 7,
+    vibratoDepth: 12,
+  }),
+  sound('circus', 'orgel', 'Orgel', 'music', 3.5, {
+    type: 'melody',
+    notes: [C5, E5, G5, C6, G5, E5, C5, G4],
+    bpm: 132,
+    wave: 'square',
+    gain: 0.08,
+    filter: 1800,
+    note: 0.8,
+  }),
+  sound('circus', 'applaus', 'Applaus', 'stars', 1.8, { type: 'crackle', dur: 1.6, gap: 0.035, gain: 0.28 }),
+  sound('circus', 'trapez', 'Trapez', 'sparkle', 0.75, {
+    type: 'sweep',
+    from: 300,
+    to: 900,
+    dur: 0.6,
+    wave: 'sine',
+    gain: 0.24,
+    curve: 'exp',
+  }),
+  sound('circus', 'bruellen', 'Brüllen', 'clown', 1.3, {
+    type: 'noise',
+    dur: 1.1,
+    color: 'brown',
+    filter: 320,
+    gain: 0.5,
+    attack: 0.08,
+    release: 0.3,
+  }),
+  sound('circus', 'ball', 'Ball', 'ball', 0.55, mix([
+    { type: 'tone', freq: 180, dur: 0.25, wave: 'sine', gain: 0.4, attack: 0.001, release: 0.18 },
+    { type: 'tone', freq: 260, dur: 0.2, start: 0.22, wave: 'sine', gain: 0.3, attack: 0.001, release: 0.15 },
+  ])),
+  sound('circus', 'tusch', 'Tusch', 'music', 1.15, mix([
+    { type: 'tone', freq: C4, dur: 0.9, wave: 'sawtooth', gain: 0.1, filter: 1200, attack: 0.01, release: 0.25 },
+    { type: 'tone', freq: E4, dur: 0.9, wave: 'triangle', gain: 0.16, attack: 0.01, release: 0.25 },
+    { type: 'tone', freq: G4, dur: 0.9, wave: 'triangle', gain: 0.16, attack: 0.01, release: 0.3 },
+    { type: 'noise', dur: 0.2, filter: 2000, filterType: 'highpass', gain: 0.2, attack: 0.001, release: 0.15 },
+  ])),
+
+  sound('pirates', 'wellen', 'Wellen', 'wave', 6.2, mix([
+    { type: 'noise', dur: 2.4, color: 'brown', filter: 480, gain: 0.38, attack: 0.45, release: 0.8 },
+    { type: 'noise', dur: 2.6, start: 1.8, color: 'brown', filter: 640, gain: 0.4, attack: 0.5, release: 0.9 },
+    { type: 'noise', dur: 2.2, start: 3.7, filter: 1200, filterType: 'bandpass', q: 0.5, gain: 0.12, attack: 0.3, release: 0.6 },
+  ])),
+  sound('pirates', 'kanone', 'Kanone', 'pistol', 0.9, mix([
+    { type: 'noise', dur: 0.25, filter: 900, gain: 0.55, attack: 0.001, release: 0.2 },
+    { type: 'sweep', from: 120, to: 35, dur: 0.7, wave: 'sine', gain: 0.75, curve: 'exp' },
+  ])),
+  sound('pirates', 'moewe', 'Möwe', 'bird', 1.15, mix([
+    { type: 'sweep', from: 1400, to: 900, dur: 0.35, wave: 'sine', gain: 0.18, curve: 'lin' },
+    { type: 'sweep', from: 1500, to: 800, dur: 0.4, start: 0.45, wave: 'sine', gain: 0.16, curve: 'lin' },
+  ])),
+  sound('pirates', 'shanty', 'Shanty', 'music', 4.5, {
+    type: 'melody',
+    notes: [C4, E4, G4, A4, G4, E4, D4, C4],
+    bpm: 108,
+    wave: 'triangle',
+    gain: 0.28,
+    note: 0.85,
+  }),
+  sound('pirates', 'kette', 'Kette', 'bell', 1.3, { type: 'crackle', dur: 1.15, gap: 0.09, gain: 0.32 }),
+  sound('pirates', 'wind', 'Wind', 'wave', 4.5, {
+    type: 'noise',
+    dur: 4.2,
+    color: 'brown',
+    filter: 700,
+    gain: 0.32,
+    attack: 0.6,
+    release: 0.8,
+  }),
+  sound('pirates', 'ahoi', 'Ahoi', 'jolly', 1.05, {
+    type: 'tone',
+    freq: 196,
+    dur: 0.9,
+    wave: 'sawtooth',
+    gain: 0.18,
+    filter: 800,
+    attack: 0.04,
+    release: 0.25,
+  }),
+  sound('pirates', 'muenzen', 'Münzen', 'sparkle', 1.05, {
+    type: 'melody',
+    notes: [C6, E5, A5, G5, C6],
+    bpm: 280,
+    wave: 'sine',
+    gain: 0.16,
+    note: 0.35,
+  }),
+
+  sound('space', 'laser', 'Laser', 'pistol', 0.48, {
+    type: 'sweep',
+    from: 1500,
+    to: 140,
+    dur: 0.36,
+    wave: 'square',
+    gain: 0.12,
+    curve: 'exp',
+    filter: 2400,
+  }),
+  sound('space', 'rakete', 'Rakete', 'rocket', 1.9, mix([
+    { type: 'noise', dur: 1.7, color: 'brown', filter: 500, gain: 0.4, attack: 0.15, release: 0.3 },
+    { type: 'sweep', from: 180, to: 60, dur: 1.5, wave: 'sawtooth', gain: 0.12, filter: 600, curve: 'lin' },
+  ])),
+  sound('space', 'alien', 'Alien', 'planet', 1.7, {
+    type: 'melody',
+    notes: [700, 530, 890, 420, 760],
+    bpm: 180,
+    wave: 'square',
+    gain: 0.07,
+    filter: 2000,
+    note: 0.7,
+  }),
+  sound('space', 'funk', 'Funk', 'music', 1.5, {
+    type: 'melody',
+    notes: [880, 0, 660, 880, 0, 520],
+    bpm: 200,
+    wave: 'square',
+    gain: 0.1,
+    filter: 1600,
+    note: 0.45,
+  }),
+  sound('space', 'piep', 'Piep', 'sparkle', 1.15, {
+    type: 'melody',
+    notes: [880, 0, 880, 0, 660],
+    bpm: 240,
+    wave: 'square',
+    gain: 0.1,
+    filter: 1800,
+    note: 0.4,
+  }),
+  sound('space', 'stern', 'Stern', 'stars', 1.35, mix([
+    { type: 'tone', freq: 1568, dur: 0.8, wave: 'sine', gain: 0.16, attack: 0.001, release: 0.7 },
+    { type: 'tone', freq: 2093, dur: 0.5, start: 0.15, wave: 'sine', gain: 0.1, attack: 0.001, release: 0.4 },
+  ])),
+  sound('space', 'ufo', 'Ufo', 'planet', 1.7, {
+    type: 'tone',
+    freq: 340,
+    dur: 1.5,
+    wave: 'sawtooth',
+    gain: 0.12,
+    filter: 1200,
+    vibrato: 6,
+    vibratoDepth: 70,
+    attack: 0.1,
+    release: 0.3,
+  }),
+  sound('space', 'countdown', 'Countdown', 'bell', 2.8, {
+    type: 'melody',
+    notes: [880, 880, 880, 523],
+    bpm: 80,
+    wave: 'square',
+    gain: 0.09,
+    filter: 1400,
+    note: 0.35,
+  }),
+
+  sound('skate', 'rollen', 'Rollen', 'skate', 1.5, {
+    type: 'noise',
+    dur: 1.35,
+    filter: 900,
+    filterType: 'bandpass',
+    q: 0.8,
+    gain: 0.32,
+    attack: 0.05,
+    release: 0.15,
+  }),
+  sound('skate', 'ollie', 'Ollie', 'skate', 0.6, mix([
+    { type: 'noise', dur: 0.05, filter: 2200, filterType: 'highpass', gain: 0.35, attack: 0.001, release: 0.04 },
+    { type: 'sweep', from: 240, to: 520, dur: 0.28, start: 0.04, wave: 'sine', gain: 0.35, curve: 'exp' },
+  ])),
+  sound('skate', 'grind', 'Grind', 'sparkle', 0.95, {
+    type: 'noise',
+    dur: 0.8,
+    filter: 1800,
+    filterType: 'bandpass',
+    q: 3,
+    gain: 0.28,
+    attack: 0.02,
+    release: 0.12,
+  }),
+  sound('skate', 'landung', 'Landung', 'drum', 0.5, {
+    type: 'sweep',
+    from: 200,
+    to: 48,
+    dur: 0.32,
+    wave: 'sine',
+    gain: 0.7,
+    curve: 'exp',
+  }),
+  sound('skate', 'klick', 'Klick', 'drum', 0.4, mix([
+    { type: 'noise', dur: 0.04, filter: 2500, filterType: 'highpass', gain: 0.35, attack: 0.001, release: 0.03 },
+    { type: 'tone', freq: 180, dur: 0.2, wave: 'sine', gain: 0.35, attack: 0.001, release: 0.15 },
+  ])),
+  sound('skate', 'tempo', 'Tempo', 'skate', 1.15, {
+    type: 'noise',
+    dur: 1.0,
+    filter: 1400,
+    filterType: 'bandpass',
+    q: 1.2,
+    gain: 0.3,
+    attack: 0.04,
+    release: 0.12,
+  }),
+  sound('skate', 'sprung', 'Sprung', 'sparkle', 0.55, {
+    type: 'sweep',
+    from: 280,
+    to: 700,
+    dur: 0.4,
+    wave: 'sine',
+    gain: 0.3,
+    curve: 'exp',
+  }),
+  sound('skate', 'jubel', 'Jubel', 'stars', 0.9, {
+    type: 'melody',
+    notes: [C5, E5, G5, C6],
+    bpm: 220,
+    wave: 'triangle',
+    gain: 0.24,
+    note: 0.6,
+  }),
+]

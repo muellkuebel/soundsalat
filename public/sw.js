@@ -1,0 +1,96 @@
+const CACHE = 'soundsalat-v1'
+const PRECACHE = [
+  '/',
+  '/manifest.webmanifest',
+  '/favicon.svg',
+  '/doodle.svg',
+  '/sounds/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-maskable.png',
+  '/icons/apple-touch-icon.png',
+]
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE)
+      await Promise.all(
+        PRECACHE.map(async (url) => {
+          try {
+            const response = await fetch(url)
+            if (response.ok) await cache.put(url, response)
+          } catch {
+            /* a missing optional file should not block install */
+          }
+        }),
+      )
+      await self.skipWaiting()
+    })(),
+  )
+})
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys()
+      await Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))
+      await self.clients.claim()
+    })(),
+  )
+})
+
+self.addEventListener('message', (event) => {
+  const data = event.data
+  if (!data || data.type !== 'cache-urls' || !Array.isArray(data.urls)) return
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE)
+      await Promise.all(
+        data.urls.map(async (url) => {
+          try {
+            const response = await fetch(url)
+            if (response.ok) await cache.put(url, response)
+          } catch {
+            /* ignore individual failures */
+          }
+        }),
+      )
+    })(),
+  )
+})
+
+self.addEventListener('fetch', (event) => {
+  const request = event.request
+  if (request.method !== 'GET') return
+  const url = new URL(request.url)
+  if (url.origin !== self.location.origin) return
+
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone()
+          caches.open(CACHE).then((cache) => cache.put('/', copy)).catch(() => {})
+          return response
+        })
+        .catch(async () => (await caches.match(request)) || (await caches.match('/')) || Response.error()),
+    )
+    return
+  }
+
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const network = fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone()
+            caches.open(CACHE).then((cache) => cache.put(request, copy)).catch(() => {})
+          }
+          return response
+        })
+        .catch(() => cached)
+      return cached || network
+    }),
+  )
+})

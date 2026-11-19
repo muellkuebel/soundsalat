@@ -1,0 +1,4 @@
+{
+  "comment": "Eigene WAV- oder MP3-Dateien unter public/sounds/ ablegen und hier eintragen. Sie erscheinen zusätzlich zu den eingebauten Tönen. duration ist die Länge in Sekunden.",
+  "clips": []
+}
