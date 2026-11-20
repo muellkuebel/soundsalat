@@ -91,5 +91,6 @@ Processed locally: silence trimmed, loudness normalized to about −16 LUFS, enc
 ## Icons
 
 Sound tiles and timeline clips use colorful flat icons in `public/emoji/`.
-Most are from [Twemoji](https://github.com/twitter/twemoji) by Twitter, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Category tabs use the same style, in `public/tabs/`: microphone, jack-o'-lantern, castle, fire, crown, soccer ball, clown face, pirate flag, rocket, and skateboard.
+These pictures are from [Twemoji](https://github.com/twitter/twemoji) 14.0.2 by Twitter, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 `princess-glocke.svg` and `princess-glanz.svg` are original drawings for this app so those two sounds do not share an icon with another clip.

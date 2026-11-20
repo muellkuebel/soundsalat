@@ -272,7 +272,27 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lettuce-dee
   border-radius: 999px 999px 16px 16px; display: grid; place-items: center;
   box-shadow: 0 3px 0 rgba(0,0,0,.08);
 }
-.cat svg { width: clamp(30px, 4vmin, 44px); height: clamp(30px, 4vmin, 44px); }
+.cat-badge {
+  width: clamp(42px, 6.8vmin, 64px);
+  height: clamp(42px, 6.8vmin, 64px);
+  border-radius: 50%;
+  background: white;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+  justify-self: center;
+  align-self: center;
+}
+.cat-badge img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.cat.active .cat-badge {
+  width: clamp(50px, 8vmin, 76px);
+  height: clamp(50px, 8vmin, 76px);
+}
 .cat.active {
   margin-bottom: -2px;
   height: clamp(62px, 9vmin, 84px);
@@ -337,8 +357,10 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lettuce-dee
     max-height: 132px;
   }
   .chip { min-height: 104px; }
-  .cat { height: 48px; margin-bottom: 6px; }
-  .cat.active { height: 56px; }
+  .cat { height: 52px; margin-bottom: 6px; }
+  .cat.active { height: 60px; }
+  .cat-badge { width: 44px; height: 44px; }
+  .cat.active .cat-badge { width: 52px; height: 52px; }
 }
 .record-panel { color: white; }
 .rec-error { margin: 0; padding: 6px 16px 0; font-weight: 650; }

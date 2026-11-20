@@ -3,7 +3,6 @@ import { CATEGORIES } from '../categories.ts'
 import { formatClock } from '../lib/time.ts'
 import { useStore } from '../store.tsx'
 import type { CategoryId, RecordingRecord } from '../types.ts'
-import { Illustration } from './illustrations.tsx'
 import { RecordPanel } from './RecordPanel.tsx'
 import { SoundIcon } from './SoundIcon.tsx'
 import { UiIcon } from './ui-icons.tsx'
@@ -43,7 +42,9 @@ export function Dock({
             data-category={item.id}
             onClick={() => onCategory(item.id)}
           >
-            <Illustration name={item.icon} />
+            <span className="cat-badge">
+              <img src={`${import.meta.env.BASE_URL}tabs/${item.id}.svg`} alt="" draggable={false} />
+            </span>
           </button>
         ))}
       </div>

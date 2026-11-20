@@ -1,4 +1,4 @@
-const CACHE = 'soundsalat-v4'
+const CACHE = 'soundsalat-v5'
 const BASE = '/soundsalat/'
 
 function withBase(path) {
@@ -15,6 +15,16 @@ const PRECACHE = [
   withBase('icons/icon-512.png'),
   withBase('icons/icon-maskable.png'),
   withBase('icons/apple-touch-icon.png'),
+  withBase('tabs/mic.svg'),
+  withBase('tabs/halloween.svg'),
+  withBase('tabs/castle.svg'),
+  withBase('tabs/fire.svg'),
+  withBase('tabs/princess.svg'),
+  withBase('tabs/football.svg'),
+  withBase('tabs/circus.svg'),
+  withBase('tabs/pirates.svg'),
+  withBase('tabs/space.svg'),
+  withBase('tabs/skate.svg'),
 ]
 
 function inApp(url) {
