@@ -624,6 +624,158 @@
       "icon": "skate",
       "file": "skate/skate-ollie.mp3",
       "duration": 0.24
+    },
+    {
+      "id": "christmas-schlitten",
+      "name": "Schlittenglocken",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-schlitten.mp3",
+      "duration": 7.52
+    },
+    {
+      "id": "christmas-rentier",
+      "name": "Rentier-Schlitten",
+      "category": "christmas",
+      "icon": "horse",
+      "file": "christmas/christmas-rentier.mp3",
+      "duration": 7.68
+    },
+    {
+      "id": "christmas-jinglebells",
+      "name": "Jingle Bells",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-jinglebells.mp3",
+      "duration": 12.41
+    },
+    {
+      "id": "christmas-stapfen",
+      "name": "Schnee-Stapfen",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-stapfen.mp3",
+      "duration": 4.08
+    },
+    {
+      "id": "christmas-kirchenglocken",
+      "name": "Kirchenglocken",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-kirchenglocken.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-kamin",
+      "name": "Kaminfeuer",
+      "category": "christmas",
+      "icon": "flame",
+      "file": "christmas/christmas-kamin.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-geschenk",
+      "name": "Geschenkpapier",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-geschenk.mp3",
+      "duration": 4.99
+    },
+    {
+      "id": "christmas-hohoho",
+      "name": "Ho ho ho",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-hohoho.mp3",
+      "duration": 4.73
+    },
+    {
+      "id": "christmas-spieluhr",
+      "name": "Spieluhr",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-spieluhr.mp3",
+      "duration": 8.02
+    },
+    {
+      "id": "christmas-winterzauber",
+      "name": "Winterzauber",
+      "category": "christmas",
+      "icon": "sparkle",
+      "file": "christmas/christmas-winterzauber.mp3",
+      "duration": 5.59
+    },
+    {
+      "id": "ambience-wind",
+      "name": "Wind",
+      "category": "ambience",
+      "icon": "wave",
+      "file": "ambience/ambience-wind.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "ambience-meer",
+      "name": "Meer",
+      "category": "ambience",
+      "icon": "wave",
+      "file": "ambience/ambience-meer.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "ambience-sturm",
+      "name": "Sturm",
+      "category": "ambience",
+      "icon": "wave",
+      "file": "ambience/ambience-sturm.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "ambience-regen",
+      "name": "Regen",
+      "category": "ambience",
+      "icon": "wave",
+      "file": "ambience/ambience-regen.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "ambience-gewitter",
+      "name": "Gewitter",
+      "category": "ambience",
+      "icon": "sparkle",
+      "file": "ambience/ambience-gewitter.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "ambience-wald",
+      "name": "Wald",
+      "category": "ambience",
+      "icon": "bird",
+      "file": "ambience/ambience-wald.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "ambience-bach",
+      "name": "Bach",
+      "category": "ambience",
+      "icon": "wave",
+      "file": "ambience/ambience-bach.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "ambience-grillen",
+      "name": "Grillen",
+      "category": "ambience",
+      "icon": "stars",
+      "file": "ambience/ambience-grillen.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "ambience-stadt",
+      "name": "Stadt",
+      "category": "ambience",
+      "icon": "castle",
+      "file": "ambience/ambience-stadt.mp3",
+      "duration": 14.03
     }
   ]
 }

@@ -89,7 +89,7 @@ On the computer itself, `http://127.0.0.1:43123/soundsalat/` is a secure context
 
 - **Einstellungen** lists projects to rename or delete, and can save or load one backup file with every project and recording. A long-press on a card opens rename and delete. A fresh install shows only the **+** card.
 - Tap **+** to start a project, pick a picture, and name it.
-- The bottom domes are sound trays. Tap a tile to hear it, tap again to stop. Drag it onto a lane, or tap **+** on the playing tile to drop it at the playhead.
+- The bottom domes are sound trays. Tap a tile to hear it, tap again to stop. Drag it onto a lane, or tap **+** on the last tapped tile to drop it at the playhead. The **+** stays on that tile after the sound ends, until another tile is tapped.
 - **Menü** leaves the editor. **Rückgängig** and **Wiederholen** step through timeline edits. Play is green, pause is yellow, stop is red.
 - Tap a clip to select it. The top bar takes its color: volume, preview, duplicate, lock, trim, delete.
 - Drag clips between the four lanes. Drag the playhead to move through the story. The strip above the lanes is an overview.
@@ -99,7 +99,11 @@ On the computer itself, `http://127.0.0.1:43123/soundsalat/` is a secure context
 
 ## Sounds
 
-Each category ships about eight or nine real sound effects, trimmed and saved as mono MP3. They are all **CC0** (public domain). Authors and source pages are in [CREDITS.md](CREDITS.md). If a file fails to load, that clip falls back to a short synthesized sound. The service worker caches the MP3s for offline use after the production build has been opened once.
+Each category ships about eight to ten sound effects, trimmed and saved as mono MP3. They are all **CC0** (public domain) or made for this app.
+
+The tabs are Mikrofon, Halloween, Ritter, Feuer, Prinzessin, Fußball, Zirkus, Piraten, Weltall, Skaten, **Weihnachten** (sleigh bells, snow steps, church bells, fireplace, wrapping paper, Ho ho ho, a Jingle Bells chime, an O Tannenbaum music box), and **Hintergrund** (wind, sea, storm, rain, thunderstorm, forest, brook, crickets, city). The Hintergrund clips are 12 to 14 seconds long and cut as seamless loops, so several can be placed end to end.
+
+`scripts/build-sounds.py` builds the first ten categories. `scripts/build-theme-sounds.py` downloads the sources for Weihnachten and Hintergrund, synthesizes the Jingle Bells and music box clips, and merges them into the manifest and `CREDITS.md`. Authors and source pages are in [CREDITS.md](CREDITS.md). If a file fails to load, that clip falls back to a short synthesized sound. The service worker caches the MP3s for offline use after the production build has been opened once.
 
 To add more recordings:
 
@@ -121,7 +125,7 @@ To add more recordings:
 }
 ```
 
-`category` is one of `mic`, `halloween`, `castle`, `fire`, `princess`, `football`, `circus`, `pirates`, `space`, `skate`. `duration` is the length in seconds shown before the file is decoded. The file is added beside the procedural sounds. Use sounds you have the rights to use.
+`category` is one of `mic`, `halloween`, `castle`, `fire`, `princess`, `football`, `circus`, `pirates`, `space`, `skate`, `christmas`, `ambience`. `duration` is the length in seconds shown before the file is decoded. The file is added beside the procedural sounds. Use sounds you have the rights to use.
 
 ## Screenshots
 

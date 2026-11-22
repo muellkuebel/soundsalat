@@ -202,6 +202,23 @@ const arts: Record<IconName, ReactNode> = {
       <circle cx="22" cy="48" r="6" fill="#7cb342" stroke={ink} strokeWidth="3" />
     </Art>
   ),
+  tree: (
+    <Art>
+      <path d="M32 8 18 28h7L14 42h9L12 52h40L41 42h9L39 28h7L32 8Z" fill="#3e9a4f" stroke={ink} strokeWidth="3" strokeLinejoin="round" />
+      <rect x="28" y="52" width="8" height="6" fill="#a0632f" stroke={ink} strokeWidth="2.5" />
+      <circle cx="27" cy="34" r="2.6" fill="#e23d3d" />
+      <circle cx="37" cy="44" r="2.6" fill="#f2c014" />
+      <circle cx="25" cy="47" r="2.6" fill="#7eb6ff" />
+      <path d="M32 2l1.8 3.8 4.2.4-3.2 2.8 1 4.1L32 11l-3.8 2.1 1-4.1-3.2-2.8 4.2-.4L32 2Z" fill="#f2c014" stroke={ink} strokeWidth="1.5" strokeLinejoin="round" />
+    </Art>
+  ),
+  cloud: (
+    <Art>
+      <circle cx="44" cy="20" r="8" fill="#f2c014" stroke={ink} strokeWidth="3" />
+      <path d="M18 42a9 9 0 0 1 1-18 12 12 0 0 1 23 2 8 8 0 0 1 2 16H18Z" fill="#f4f8ef" stroke={ink} strokeWidth="3" strokeLinejoin="round" />
+      <path d="M22 48l-2 6M31 48l-2 6M40 48l-2 6" stroke="#3d8fd1" strokeWidth="3" strokeLinecap="round" />
+    </Art>
+  ),
 }
 
 export function Illustration({ name }: { name: IconName }) {

@@ -12,6 +12,8 @@ export const CATEGORIES: readonly Category[] = [
   { id: 'pirates', name: 'Piraten', color: '#3e7d46', icon: 'jolly' },
   { id: 'space', name: 'Weltall', color: '#5b3d99', icon: 'planet' },
   { id: 'skate', name: 'Skaten', color: '#7cb342', icon: 'skate' },
+  { id: 'christmas', name: 'Weihnachten', color: '#c8304f', icon: 'tree' },
+  { id: 'ambience', name: 'Hintergrund', color: '#3d8fd1', icon: 'cloud' },
 ]
 
 export function categoryById(id: string): Category {

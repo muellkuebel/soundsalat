@@ -1,4 +1,4 @@
-const CACHE = 'soundsalat-v5'
+const CACHE = 'soundsalat-v6'
 const BASE = '/soundsalat/'
 
 function withBase(path) {
@@ -25,6 +25,8 @@ const PRECACHE = [
   withBase('tabs/pirates.svg'),
   withBase('tabs/space.svg'),
   withBase('tabs/skate.svg'),
+  withBase('tabs/christmas.svg'),
+  withBase('tabs/ambience.svg'),
 ]
 
 function inApp(url) {

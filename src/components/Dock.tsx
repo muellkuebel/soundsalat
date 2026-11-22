@@ -1,6 +1,7 @@
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import { CATEGORIES } from '../categories.ts'
 import { formatClock } from '../lib/time.ts'
+import { chipState } from '../lib/tray.ts'
 import { useStore } from '../store.tsx'
 import type { CategoryId, RecordingRecord } from '../types.ts'
 import { RecordPanel } from './RecordPanel.tsx'
@@ -11,6 +12,7 @@ export function Dock({
   category,
   recordings,
   auditionId,
+  pickedId,
   onCategory,
   onChipDown,
   onAdd,
@@ -20,6 +22,7 @@ export function Dock({
   category: CategoryId | null
   recordings: RecordingRecord[]
   auditionId: string | null
+  pickedId: string | null
   onCategory: (id: CategoryId) => void
   onChipDown: (event: ReactPointerEvent, soundId: string, duration: number) => void
   onAdd: (soundId: string, duration: number) => void
@@ -54,6 +57,7 @@ export function Dock({
             category={category}
             recordings={recordings}
             auditionId={auditionId}
+            pickedId={pickedId}
             onChipDown={onChipDown}
             onAdd={onAdd}
           />
@@ -68,12 +72,14 @@ function Tray({
   category,
   recordings,
   auditionId,
+  pickedId,
   onChipDown,
   onAdd,
 }: {
   category: CategoryId
   recordings: RecordingRecord[]
   auditionId: string | null
+  pickedId: string | null
   onChipDown: (event: ReactPointerEvent, soundId: string, duration: number) => void
   onAdd: (soundId: string, duration: number) => void
 }) {
@@ -95,9 +101,13 @@ function Tray({
       {items.length === 0 ? null : (
       <div className="tray-scroll">
         {items.map((item) => {
-          const playing = auditionId === item.id
+          const { playing, showAdd } = chipState(item.id, auditionId, pickedId)
           return (
-            <div key={item.id} className={`chip ${playing ? 'playing' : ''}`} data-sound={item.id}>
+            <div
+              key={item.id}
+              className={`chip ${playing ? 'playing' : ''} ${showAdd ? 'picked' : ''}`}
+              data-sound={item.id}
+            >
               <button
                 type="button"
                 className="chip-hit"
@@ -110,7 +120,7 @@ function Tray({
                 </span>
                 <span className="chip-time">{formatClock(item.duration)}</span>
               </button>
-              {playing ? (
+              {showAdd ? (
                 <button
                   type="button"
                   className="chip-add"

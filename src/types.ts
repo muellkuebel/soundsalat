@@ -9,6 +9,8 @@ export const CATEGORY_IDS = [
   'pirates',
   'space',
   'skate',
+  'christmas',
+  'ambience',
 ] as const
 
 export type CategoryId = (typeof CATEGORY_IDS)[number]
@@ -41,6 +43,8 @@ export const ICON_NAMES = [
   'horse',
   'heart',
   'note',
+  'tree',
+  'cloud',
 ] as const
 
 export type IconName = (typeof ICON_NAMES)[number]

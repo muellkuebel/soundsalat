@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build the CC0 sound library: trim, normalize, encode, write manifest and credits."""
+"""Build the CC0 sound library: trim, normalize, encode, write manifest and credits.
+
+This rewrites every category folder, the manifest, and CREDITS.md. Run
+scripts/build-theme-sounds.py afterwards to add Weihnachten and Hintergrund again.
+"""
 
 from __future__ import annotations
 

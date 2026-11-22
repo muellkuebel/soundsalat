@@ -52,6 +52,7 @@ export function Editor({ projectId }: { projectId: string }) {
   )
   const [moveOverride, setMoveOverride] = useState<{ id: string; startTime: number; lane: number } | null>(null)
   const [auditionId, setAuditionId] = useState<string | null>(null)
+  const [pickedId, setPickedId] = useState<string | null>(null)
   const [historyNav, setHistoryNav] = useState({ undo: 0, redo: 0 })
   const past = useRef<{ clips: Clip[]; recordings: RecordingRecord[] }[]>([])
   const future = useRef<{ clips: Clip[]; recordings: RecordingRecord[] }[]>([])
@@ -250,6 +251,7 @@ export function Editor({ projectId }: { projectId: string }) {
     future.current = []
     setHistoryNav({ undo: 0, redo: 0 })
     setAuditionId(null)
+    setPickedId(null)
   }, [projectId])
 
   useEffect(() => {
@@ -314,6 +316,7 @@ export function Editor({ projectId }: { projectId: string }) {
 
   async function audition(soundId: string) {
     const engine = getEngine()
+    setPickedId(soundId)
     if (auditionId === soundId) {
       auditionToken.current += 1
       engine.stopPreview()
@@ -598,6 +601,7 @@ export function Editor({ projectId }: { projectId: string }) {
         category={category}
         recordings={recordings}
         auditionId={auditionId}
+        pickedId={pickedId}
         onCategory={(id) => {
           auditionToken.current += 1
           getEngine().stopPreview()

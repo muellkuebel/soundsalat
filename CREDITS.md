@@ -85,12 +85,34 @@ If a file cannot be loaded, the app plays a short synthesized stand-in instead.
 | `skate-rutschen` | Rutschen | `public/sounds/skate/skate-rutschen.mp3` | Kenney | CC0 1.0 Universal (public domain) | https://kenney.nl/assets/interface-sounds |
 | `skate-jubel` | Jubel | `public/sounds/skate/skate-jubel.mp3` | Kenney | CC0 1.0 Universal (public domain) | https://kenney.nl/assets/music-jingles |
 | `skate-ollie` | Ollie | `public/sounds/skate/skate-ollie.mp3` | Kenney | CC0 1.0 Universal (public domain) | https://kenney.nl/assets/interface-sounds |
+| `christmas-schlitten` | Schlittenglocken | `public/sounds/christmas/christmas-schlitten.mp3` | jcdecha | CC0 1.0 Universal (public domain) | https://freesound.org/people/jcdecha/sounds/235465/ |
+| `christmas-rentier` | Rentier-Schlitten | `public/sounds/christmas/christmas-rentier.mp3` | MrFizzywig (hooves) and Zott820 (sleigh bells), mixed | CC0 1.0 Universal (public domain) | https://freesound.org/people/MrFizzywig/sounds/581834/ and https://freesound.org/people/Zott820/sounds/261006/ |
+| `christmas-jinglebells` | Jingle Bells | `public/sounds/christmas/christmas-jinglebells.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | scripts/build-theme-sounds.py (tune: James Lord Pierpont, 1857, public domain) |
+| `christmas-stapfen` | Schnee-Stapfen | `public/sounds/christmas/christmas-stapfen.mp3` | IgnasD (steps arranged here) | CC0 1.0 Universal (public domain) | https://opengameart.org/content/walking-on-snow-sound |
+| `christmas-kirchenglocken` | Kirchenglocken | `public/sounds/christmas/christmas-kirchenglocken.mp3` | craigsmith | CC0 1.0 Universal (public domain) | https://freesound.org/people/craigsmith/sounds/480014/ |
+| `christmas-kamin` | Kaminfeuer | `public/sounds/christmas/christmas-kamin.mp3` | Julien_Matthey | CC0 1.0 Universal (public domain) | https://freesound.org/people/Julien_Matthey/sounds/112811/ |
+| `christmas-geschenk` | Geschenkpapier | `public/sounds/christmas/christmas-geschenk.mp3` | GrayJoy | CC0 1.0 Universal (public domain) | https://freesound.org/people/GrayJoy/sounds/344433/ |
+| `christmas-hohoho` | Ho ho ho | `public/sounds/christmas/christmas-hohoho.mp3` | Cloud-10 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Cloud-10/sounds/536245/ |
+| `christmas-spieluhr` | Spieluhr | `public/sounds/christmas/christmas-spieluhr.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | scripts/build-theme-sounds.py (tune: O Tannenbaum, traditional, public domain) |
+| `christmas-winterzauber` | Winterzauber | `public/sounds/christmas/christmas-winterzauber.mp3` | Cloud-10 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Cloud-10/sounds/536251/ |
+| `ambience-wind` | Wind | `public/sounds/ambience/ambience-wind.mp3` | Jeffreys2 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Jeffreys2/sounds/327771/ (loop cut) |
+| `ambience-meer` | Meer | `public/sounds/ambience/ambience-meer.mp3` | derjuli | CC0 1.0 Universal (public domain) | https://freesound.org/people/derjuli/sounds/693389/ (loop cut) |
+| `ambience-sturm` | Sturm | `public/sounds/ambience/ambience-sturm.mp3` | Tsorthan Grove | CC0 1.0 Universal (public domain) | https://opengameart.org/content/storm-arwen-2022 (loop cut) |
+| `ambience-regen` | Regen | `public/sounds/ambience/ambience-regen.mp3` | Kresiek The Furry | CC0 1.0 Universal (public domain) | https://opengameart.org/content/amb-rain-loop-1 (loop cut) |
+| `ambience-gewitter` | Gewitter | `public/sounds/ambience/ambience-gewitter.mp3` | humanoide9000 | CC0 1.0 Universal (public domain) | https://freesound.org/people/humanoide9000/sounds/324588/ (loop cut) |
+| `ambience-wald` | Wald | `public/sounds/ambience/ambience-wald.mp3` | Thimras | CC0 1.0 Universal (public domain) | https://opengameart.org/content/park-ambiences (loop cut) |
+| `ambience-bach` | Bach | `public/sounds/ambience/ambience-bach.mp3` | Thimras | CC0 1.0 Universal (public domain) | https://opengameart.org/content/park-ambiences (loop cut) |
+| `ambience-grillen` | Grillen | `public/sounds/ambience/ambience-grillen.mp3` | Wolfgang_ | CC0 1.0 Universal (public domain) | https://opengameart.org/content/crickets-ambient-noise-loopable (loop cut) |
+| `ambience-stadt` | Stadt | `public/sounds/ambience/ambience-stadt.mp3` | dnlburnett | CC0 1.0 Universal (public domain) | https://freesound.org/people/dnlburnett/sounds/360777/ (loop cut) |
 
 Processed locally: silence trimmed, loudness normalized to about −16 LUFS, encoded as mono 64 kbps MP3.
+The `ambience-*` clips are normalized to about −20 LUFS and cut as seamless loops (the end is crossfaded into the start).
+`christmas-jinglebells` and `christmas-spieluhr` are synthesized for this app by `scripts/build-theme-sounds.py` and released as CC0. Their melodies (Jingle Bells, 1857, and O Tannenbaum, traditional) are in the public domain.
+Freesound clips were taken from the HQ preview of each sound; every one is marked CC0 on its Freesound page.
 
 ## Icons
 
 Sound tiles and timeline clips use colorful flat icons in `public/emoji/`.
-Category tabs use the same style, in `public/tabs/`: microphone, jack-o'-lantern, castle, fire, crown, soccer ball, clown face, pirate flag, rocket, and skateboard.
+Category tabs use the same style, in `public/tabs/`: microphone, jack-o'-lantern, castle, fire, crown, soccer ball, clown face, pirate flag, rocket, skateboard, Christmas tree, and sun behind rain cloud.
 These pictures are from [Twemoji](https://github.com/twitter/twemoji) 14.0.2 by Twitter, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 `princess-glocke.svg` and `princess-glanz.svg` are original drawings for this app so those two sounds do not share an icon with another clip.
