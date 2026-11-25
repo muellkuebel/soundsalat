@@ -1242,6 +1242,14 @@
       "duration": 0.97
     },
     {
+      "id": "christmas-zugglocke",
+      "name": "Glocke vom Spielzeugzug",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-zugglocke.mp3",
+      "duration": 3.03
+    },
+    {
       "id": "christmas-muenzen",
       "name": "Münzen",
       "category": "christmas",

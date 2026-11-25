@@ -162,6 +162,7 @@ If a file cannot be loaded, the app plays a short synthesized stand-in instead.
 | `christmas-vorhang` | Vorhang | `public/sounds/christmas/christmas-vorhang.mp3` | BraveFrog | CC0 1.0 Universal (public domain) | https://freesound.org/people/BraveFrog/sounds/347237/ |
 | `christmas-schulglocke` | Schulglocke | `public/sounds/christmas/christmas-schulglocke.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
 | `christmas-ladenglocke` | Türglocke im Laden | `public/sounds/christmas/christmas-ladenglocke.mp3` | ryuuzan | CC0 1.0 Universal (public domain) | https://freesound.org/people/ryuuzan/sounds/192761/ |
+| `christmas-zugglocke` | Glocke vom Spielzeugzug | `public/sounds/christmas/christmas-zugglocke.mp3` | FuriousGinger | CC0 1.0 Universal (public domain) | https://freesound.org/people/FuriousGinger/sounds/196631/ |
 | `christmas-muenzen` | Münzen | `public/sounds/circus/circus-muenzen.mp3` | same file as `circus-muenzen` | CC0 1.0 Universal (public domain) | see `circus-muenzen` |
 | `christmas-kiste` | Kiste öffnen | `public/sounds/christmas/christmas-kiste.mp3` | newagesoup | CC0 1.0 Universal (public domain) | https://freesound.org/people/newagesoup/sounds/364740/ |
 | `christmas-sack` | Rascheln im Sack | `public/sounds/christmas/christmas-sack.mp3` | Caitlin_100 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Caitlin_100/sounds/365520/ |

@@ -1,4 +1,4 @@
-const CACHE = 'soundsalat-v7'
+const CACHE = 'soundsalat-v8'
 const BASE = '/soundsalat/'
 
 function withBase(path) {

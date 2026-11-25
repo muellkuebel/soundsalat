@@ -280,6 +280,7 @@ AMBIENCE = [
 # ---------- sounds for the Weihnachts-Hörbücher (story list) ----------
 # Freesound CC0 sounds used by the story tiles: id -> (user, HQ preview URL)
 FS_PICKS = {
+    '196631': ('FuriousGinger', 'https://cdn.freesound.org/previews/196/196631_2013714-hq.mp3'),
     '54505': ('moxobna', 'https://cdn.freesound.org/previews/54/54505_43834-hq.mp3'),
     '108519': ('bsmacbride', 'https://cdn.freesound.org/previews/108/108519_1338699-hq.mp3'),
     '156098': ('marcolo91', 'https://cdn.freesound.org/previews/156/156098_2365601-hq.mp3'),
@@ -750,6 +751,7 @@ STORY = [
     ("fs", "vorhang", "Vorhang", "note", 347237, 0, 2.5),
     ("own", "schulglocke", "Schulglocke", "bell", schulglocke, SELF, "own synthesis"),
     ("fs", "ladenglocke", "Türglocke im Laden", "bell", 192761, 0, 2),
+    ("fs", "zugglocke", "Glocke vom Spielzeugzug", "bell", 196631, 0, 3),
 
     ("reuse", "muenzen", "Münzen", "note", "circus-muenzen"),
     ("fs", "kiste", "Kiste öffnen", "note", 364740, 0, 2),
