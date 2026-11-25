@@ -122,8 +122,9 @@ test('every category has a tab picture, a cached tab, sounds, and a fallback', (
   assert.equal(new Set(CATEGORIES.map((category) => category.color)).size, CATEGORIES.length)
 })
 
-test('Weihnachten is the first tab and has every story sound with its own picture', () => {
-  assert.equal(CATEGORIES[0]?.id, 'christmas')
+test('Weihnachten is the second tab and has every story sound with its own picture', () => {
+  assert.equal(CATEGORIES[0]?.id, 'mic')
+  assert.equal(CATEGORIES[1]?.id, 'christmas')
   const christmas = manifestClips.filter((clip) => clip.category === 'christmas')
   assert.ok(christmas.length >= 90)
   const names = christmas.map((clip) => clip.name)

@@ -2,8 +2,8 @@ import type { Category, CategoryId, IconName, ThemeId } from './types.ts'
 import { CATEGORY_IDS, ICON_NAMES } from './types.ts'
 
 export const CATEGORIES: readonly Category[] = [
-  { id: 'christmas', name: 'Weihnachten', color: '#c8304f', icon: 'tree' },
   { id: 'mic', name: 'Mikrofon', color: '#e23d3d', icon: 'mic' },
+  { id: 'christmas', name: 'Weihnachten', color: '#c8304f', icon: 'tree' },
   { id: 'halloween', name: 'Halloween', color: '#f08a24', icon: 'pumpkin' },
   { id: 'castle', name: 'Ritter', color: '#e6a80e', icon: 'castle' },
   { id: 'fire', name: 'Feuer', color: '#ef5a28', icon: 'flame' },

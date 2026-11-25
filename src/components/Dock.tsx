@@ -118,6 +118,7 @@ function Tray({
                 <span className="chip-icon">
                   <SoundIcon id={item.id} />
                 </span>
+                <span className="chip-name">{item.name}</span>
                 <span className="chip-time">{formatClock(item.duration)}</span>
               </button>
               {showAdd ? (
