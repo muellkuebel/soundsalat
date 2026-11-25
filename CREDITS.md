@@ -95,6 +95,97 @@ If a file cannot be loaded, the app plays a short synthesized stand-in instead.
 | `christmas-hohoho` | Ho ho ho | `public/sounds/christmas/christmas-hohoho.mp3` | Cloud-10 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Cloud-10/sounds/536245/ |
 | `christmas-spieluhr` | Spieluhr | `public/sounds/christmas/christmas-spieluhr.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | scripts/build-theme-sounds.py (tune: O Tannenbaum, traditional, public domain) |
 | `christmas-winterzauber` | Winterzauber | `public/sounds/christmas/christmas-winterzauber.mp3` | Cloud-10 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Cloud-10/sounds/536251/ |
+| `christmas-weihnachtsmusik` | Weihnachtsmusik | `public/sounds/christmas/christmas-weihnachtsmusik.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | tune: We Wish You a Merry Christmas, traditional, public domain |
+| `christmas-froehlichemusik` | Fröhliche Musik | `public/sounds/christmas/christmas-froehlichemusik.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | tune: Deck the Halls, traditional, public domain |
+| `christmas-klavier` | Klaviermusik | `public/sounds/christmas/christmas-klavier.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | tune: Joy to the World, Lowell Mason 1839, public domain |
+| `christmas-nachtmusik` | Leise Nachtmusik | `public/sounds/christmas/christmas-nachtmusik.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | tune: Stille Nacht, Franz Xaver Gruber 1818, public domain |
+| `christmas-zaubermusik` | Leise Zaubermusik | `public/sounds/christmas/christmas-zaubermusik.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own composition |
+| `christmas-karussell` | Karussellmusik | `public/sounds/christmas/christmas-karussell.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own composition |
+| `christmas-markt` | Weihnachtsmarkt | `public/sounds/christmas/christmas-markt.mp3` | Breviceps (crowd) and own music, mixed | CC0 1.0 Universal (public domain) | crowd: https://freesound.org/people/Breviceps/sounds/457043/ |
+| `christmas-gloeckchen` | Leise Glöckchen | `public/sounds/christmas/christmas-gloeckchen.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-schlittenfliegt` | Schlitten fliegt davon | `public/sounds/christmas/christmas-schlittenfliegt.mp3` | jcdecha (sleigh bells), processed here | CC0 1.0 Universal (public domain) | https://freesound.org/people/jcdecha/sounds/235465/ |
+| `christmas-zauberglitzern` | Zauberglitzern | `public/sounds/princess/princess-funkeln.mp3` | same file as `princess-funkeln` | CC0 1.0 Universal (public domain) | see `princess-funkeln` |
+| `christmas-wuschplopp` | Wusch und Plopp | `public/sounds/christmas/christmas-wuschplopp.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-boing` | Boing | `public/sounds/christmas/christmas-boing.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-lachen` | Lachen | `public/sounds/christmas/christmas-lachen.mp3` | Kalibrk | CC0 1.0 Universal (public domain) | https://freesound.org/people/Kalibrk/sounds/433921/ |
+| `christmas-kinderlachen` | Kinder lachen | `public/sounds/christmas/christmas-kinderlachen.mp3` | Iamgiorgio | CC0 1.0 Universal (public domain) | https://freesound.org/people/Iamgiorgio/sounds/371342/ |
+| `christmas-familielacht` | Familie lacht | `public/sounds/christmas/christmas-familielacht.mp3` | Eneasz, Kalibrk and Iamgiorgio, mixed | CC0 1.0 Universal (public domain) | https://freesound.org/people/Eneasz/sounds/119459/, https://freesound.org/people/Kalibrk/sounds/433921/, https://freesound.org/people/Iamgiorgio/sounds/371342/ |
+| `christmas-tiefeslachen` | Tiefes Lachen | `public/sounds/christmas/christmas-tiefeslachen.mp3` | Eneasz | CC0 1.0 Universal (public domain) | https://freesound.org/people/Eneasz/sounds/119459/ |
+| `christmas-oh` | Oh! | `public/sounds/christmas/christmas-oh.mp3` | Reitanna | CC0 1.0 Universal (public domain) | https://freesound.org/people/Reitanna/sounds/242677/ |
+| `christmas-weinen` | Weinen | `public/sounds/christmas/christmas-weinen.mp3` | marcolo91 | CC0 1.0 Universal (public domain) | https://freesound.org/people/marcolo91/sounds/156098/ |
+| `christmas-niesen` | Niesen | `public/sounds/christmas/christmas-niesen.mp3` | moxobna | CC0 1.0 Universal (public domain) | https://freesound.org/people/moxobna/sounds/54505/ |
+| `christmas-schnarchen` | Schnarchen | `public/sounds/christmas/christmas-schnarchen.mp3` | bsmacbride | CC0 1.0 Universal (public domain) | https://freesound.org/people/bsmacbride/sounds/108519/ |
+| `christmas-stoehnen` | Stöhnen | `public/sounds/christmas/christmas-stoehnen.mp3` | iggy1345 | CC0 1.0 Universal (public domain) | https://freesound.org/people/iggy1345/sounds/103072/ |
+| `christmas-schnuppern` | Schnuppern | `public/sounds/christmas/christmas-schnuppern.mp3` | spookymodem | CC0 1.0 Universal (public domain) | https://freesound.org/people/spookymodem/sounds/202101/ |
+| `christmas-schluerfen` | Schlürfen | `public/sounds/christmas/christmas-schluerfen.mp3` | Konamiuss | CC0 1.0 Universal (public domain) | https://freesound.org/people/Konamiuss/sounds/28010/ |
+| `christmas-klatschen` | Klatschen | `public/sounds/christmas/christmas-klatschen.mp3` | anagar | CC0 1.0 Universal (public domain) | https://freesound.org/people/anagar/sounds/267930/ |
+| `christmas-applaus` | Applaus | `public/sounds/circus/circus-applaus.mp3` | same file as `circus-applaus` | CC0 1.0 Universal (public domain) | see `circus-applaus` |
+| `christmas-jubeln` | Jubeln | `public/sounds/football/football-jubel.mp3` | same file as `football-jubel` | CC0 1.0 Universal (public domain) | see `football-jubel` |
+| `christmas-kinderjubeln` | Kinder jubeln | `public/sounds/christmas/christmas-kinderjubeln.mp3` | Moulaythami | CC0 1.0 Universal (public domain) | https://freesound.org/people/Moulaythami/sounds/640855/ |
+| `christmas-kinderrufen` | Kinder rufen | `public/sounds/christmas/christmas-kinderrufen.mp3` | craigsmith | CC0 1.0 Universal (public domain) | https://freesound.org/people/craigsmith/sounds/480699/ |
+| `christmas-kindersingen` | Kinder singen | `public/sounds/christmas/christmas-kindersingen.mp3` | Anilan | CC0 1.0 Universal (public domain) | https://freesound.org/people/Anilan/sounds/840937/ |
+| `christmas-maedchensingt` | Mädchen singt | `public/sounds/christmas/christmas-maedchensingt.mp3` | maurolupo | CC0 1.0 Universal (public domain) | https://freesound.org/people/maurolupo/sounds/213259/ |
+| `christmas-menschen` | Viele Menschen | `public/sounds/christmas/christmas-menschen.mp3` | Breviceps | CC0 1.0 Universal (public domain) | https://freesound.org/people/Breviceps/sounds/457043/ |
+| `christmas-strasse` | Belebte Straße | `public/sounds/ambience/ambience-stadt.mp3` | same file as `ambience-stadt` | CC0 1.0 Universal (public domain) | see `ambience-stadt` |
+| `christmas-vogel` | Vogel | `public/sounds/christmas/christmas-vogel.mp3` | swiftoid | CC0 1.0 Universal (public domain) | https://freesound.org/people/swiftoid/sounds/182507/ |
+| `christmas-rotkehlchen` | Rotkehlchen | `public/sounds/christmas/christmas-rotkehlchen.mp3` | TheKingOfGeeks360 | CC0 1.0 Universal (public domain) | https://freesound.org/people/TheKingOfGeeks360/sounds/855901/ |
+| `christmas-eule` | Eule | `public/sounds/christmas/christmas-eule.mp3` | Breviceps | CC0 1.0 Universal (public domain) | https://freesound.org/people/Breviceps/sounds/465697/ |
+| `christmas-fluegel` | Flügelschlagen | `public/sounds/christmas/christmas-fluegel.mp3` | flashdeejay | CC0 1.0 Universal (public domain) | https://freesound.org/people/flashdeejay/sounds/241032/ |
+| `christmas-katze` | Katze | `public/sounds/christmas/christmas-katze.mp3` | tuberatanka | CC0 1.0 Universal (public domain) | https://freesound.org/people/tuberatanka/sounds/110011/ |
+| `christmas-hund` | Hund bellt | `public/sounds/christmas/christmas-hund.mp3` | LittleBigSounds | CC0 1.0 Universal (public domain) | https://freesound.org/people/LittleBigSounds/sounds/163459/ |
+| `christmas-maus` | Maus piepst | `public/sounds/christmas/christmas-maus.mp3` | AntumDeluge | CC0 1.0 Universal (public domain) | https://freesound.org/people/AntumDeluge/sounds/188043/ |
+| `christmas-hamster` | Hamster piepst | `public/sounds/christmas/christmas-hamster.mp3` | RICHERlandTV | CC0 1.0 Universal (public domain) | https://freesound.org/people/RICHERlandTV/sounds/435748/ |
+| `christmas-eichhoernchen` | Eichhörnchen | `public/sounds/christmas/christmas-eichhoernchen.mp3` | TheKingOfGeeks360 | CC0 1.0 Universal (public domain) | https://freesound.org/people/TheKingOfGeeks360/sounds/852386/ |
+| `christmas-hase` | Hase hoppelt weg | `public/sounds/christmas/christmas-hase.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-huhn` | Huhn gackert | `public/sounds/christmas/christmas-huhn.mp3` | esperri | CC0 1.0 Universal (public domain) | https://freesound.org/people/esperri/sounds/118960/ |
+| `christmas-bauernhof` | Bauernhoftiere | `public/sounds/christmas/christmas-bauernhof.mp3` | Zozzy, swiftoid, esperri and StarNinjas37, mixed | CC0 1.0 Universal (public domain) | https://freesound.org/people/Zozzy/sounds/59245/, https://freesound.org/people/swiftoid/sounds/182509/, https://freesound.org/people/esperri/sounds/118960/, https://freesound.org/people/StarNinjas37/sounds/560692/ |
+| `christmas-tee` | Tee eingießen | `public/sounds/christmas/christmas-tee.mp3` | mdayalan | CC0 1.0 Universal (public domain) | https://freesound.org/people/mdayalan/sounds/240125/ |
+| `christmas-loeffel` | Löffel in der Tasse | `public/sounds/christmas/christmas-loeffel.mp3` | squashy555 | CC0 1.0 Universal (public domain) | https://freesound.org/people/squashy555/sounds/239006/ |
+| `christmas-tassen` | Tassen klirren | `public/sounds/christmas/christmas-tassen.mp3` | ahill86 | CC0 1.0 Universal (public domain) | https://freesound.org/people/ahill86/sounds/206171/ |
+| `christmas-ei` | Ei aufschlagen | `public/sounds/christmas/christmas-ei.mp3` | FngerSounds | CC0 1.0 Universal (public domain) | https://freesound.org/people/FngerSounds/sounds/250133/ |
+| `christmas-ruehren` | Rühren | `public/sounds/christmas/christmas-ruehren.mp3` | KidsCastTechy | CC0 1.0 Universal (public domain) | https://freesound.org/people/KidsCastTechy/sounds/42812/ |
+| `christmas-ofentuer` | Ofentür | `public/sounds/christmas/christmas-ofentuer.mp3` | FenrirFangs | CC0 1.0 Universal (public domain) | https://freesound.org/people/FenrirFangs/sounds/234735/ |
+| `christmas-kuechenwecker` | Küchenwecker | `public/sounds/christmas/christmas-kuechenwecker.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-kueche` | Küchengeräusche | `public/sounds/christmas/christmas-kueche.mp3` | megahope | CC0 1.0 Universal (public domain) | https://freesound.org/people/megahope/sounds/829283/ |
+| `christmas-milch` | Milch im Eimer | `public/sounds/christmas/christmas-milch.mp3` | Denis Chapon | CC0 1.0 Universal (public domain) | https://freesound.org/people/Denis%20Chapon/sounds/191823/ |
+| `christmas-dose` | Dosendeckel | `public/sounds/christmas/christmas-dose.mp3` | Mrthenoronha | CC0 1.0 Universal (public domain) | https://freesound.org/people/Mrthenoronha/sounds/371704/ |
+| `christmas-uhr` | Uhr tickt | `public/sounds/christmas/christmas-uhr.mp3` | olver | CC0 1.0 Universal (public domain) | https://freesound.org/people/olver/sounds/130388/ |
+| `christmas-telefon` | Telefon klingelt | `public/sounds/christmas/christmas-telefon.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-klopfen` | Klopfen | `public/sounds/christmas/christmas-klopfen.mp3` | wjtaylor | CC0 1.0 Universal (public domain) | https://freesound.org/people/wjtaylor/sounds/268500/ |
+| `christmas-fenster` | Klopfen am Fenster | `public/sounds/christmas/christmas-fenster.mp3` | EugeneEverett | CC0 1.0 Universal (public domain) | https://freesound.org/people/EugeneEverett/sounds/596517/ |
+| `christmas-tuer` | Tür geht auf | `public/sounds/christmas/christmas-tuer.mp3` | Anthousai | CC0 1.0 Universal (public domain) | https://freesound.org/people/Anthousai/sounds/398750/ |
+| `christmas-knarrtuer` | Knarrende Tür | `public/sounds/christmas/christmas-knarrtuer.mp3` | HowardV | CC0 1.0 Universal (public domain) | https://freesound.org/people/HowardV/sounds/393801/ |
+| `christmas-boden` | Knarrender Boden | `public/sounds/christmas/christmas-boden.mp3` | miekyj | CC0 1.0 Universal (public domain) | https://freesound.org/people/miekyj/sounds/326460/ |
+| `christmas-treppe` | Schritte auf der Treppe | `public/sounds/christmas/christmas-treppe.mp3` | LukeUPF | CC0 1.0 Universal (public domain) | https://freesound.org/people/LukeUPF/sounds/233065/ |
+| `christmas-schwereschritte` | Schwere Schritte | `public/sounds/christmas/christmas-schwereschritte.mp3` | rubberduck (footstep), processed here | CC0 1.0 Universal (public domain) | https://opengameart.org/content/100-cc0-sfx-2 |
+| `christmas-rennen` | Rennende Schritte | `public/sounds/christmas/christmas-rennen.mp3` | Rudmer_Rotteveel | CC0 1.0 Universal (public domain) | https://freesound.org/people/Rudmer_Rotteveel/sounds/316923/ |
+| `christmas-vorhang` | Vorhang | `public/sounds/christmas/christmas-vorhang.mp3` | BraveFrog | CC0 1.0 Universal (public domain) | https://freesound.org/people/BraveFrog/sounds/347237/ |
+| `christmas-schulglocke` | Schulglocke | `public/sounds/christmas/christmas-schulglocke.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-ladenglocke` | Türglocke im Laden | `public/sounds/christmas/christmas-ladenglocke.mp3` | ryuuzan | CC0 1.0 Universal (public domain) | https://freesound.org/people/ryuuzan/sounds/192761/ |
+| `christmas-muenzen` | Münzen | `public/sounds/circus/circus-muenzen.mp3` | same file as `circus-muenzen` | CC0 1.0 Universal (public domain) | see `circus-muenzen` |
+| `christmas-kiste` | Kiste öffnen | `public/sounds/christmas/christmas-kiste.mp3` | newagesoup | CC0 1.0 Universal (public domain) | https://freesound.org/people/newagesoup/sounds/364740/ |
+| `christmas-sack` | Rascheln im Sack | `public/sounds/christmas/christmas-sack.mp3` | Caitlin_100 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Caitlin_100/sounds/365520/ |
+| `christmas-papierreisst` | Papier reißt | `public/sounds/christmas/christmas-papierreisst.mp3` | keweldog | CC0 1.0 Universal (public domain) | https://freesound.org/people/keweldog/sounds/181773/ |
+| `christmas-schere` | Schere schneidet | `public/sounds/christmas/christmas-schere.mp3` | aldenroth2 | CC0 1.0 Universal (public domain) | https://freesound.org/people/aldenroth2/sounds/272035/ |
+| `christmas-stift` | Stift schreibt | `public/sounds/christmas/christmas-stift.mp3` | indigosierra | CC0 1.0 Universal (public domain) | https://freesound.org/people/indigosierra/sounds/82610/ |
+| `christmas-kamera` | Kamera klickt | `public/sounds/christmas/christmas-kamera.mp3` | xef6 | CC0 1.0 Universal (public domain) | https://freesound.org/people/xef6/sounds/61059/ |
+| `christmas-klicken` | Klicken | `public/sounds/skate/skate-klick.mp3` | same file as `skate-klick` | CC0 1.0 Universal (public domain) | see `skate-klick` |
+| `christmas-hebel` | Hebel | `public/sounds/christmas/christmas-hebel.mp3` | Krokulator | CC0 1.0 Universal (public domain) | https://freesound.org/people/Krokulator/sounds/696746/ |
+| `christmas-haemmern` | Hämmern | `public/sounds/christmas/christmas-haemmern.mp3` | cognito perceptu | CC0 1.0 Universal (public domain) | https://freesound.org/people/cognito%20perceptu/sounds/17012/ |
+| `christmas-maschine` | Maschine brummt | `public/sounds/christmas/christmas-maschine.mp3` | Soundsalat (own synthesis) | CC0 1.0 Universal (public domain) | own synthesis |
+| `christmas-werkstatt` | Volle Werkstatt | `public/sounds/christmas/christmas-werkstatt.mp3` | own mix with cognito perceptu (hammer) and Krokulator (lever) | CC0 1.0 Universal (public domain) | https://freesound.org/people/cognito%20perceptu/sounds/17012/, https://freesound.org/people/Krokulator/sounds/696746/ |
+| `christmas-absturz` | Absturz | `public/sounds/christmas/christmas-absturz.mp3` | sukondi | CC0 1.0 Universal (public domain) | https://freesound.org/people/sukondi/sounds/553886/ |
+| `christmas-plumps` | Plumps | `public/sounds/christmas/christmas-plumps.mp3` | courtneyeck | CC0 1.0 Universal (public domain) | https://freesound.org/people/courtneyeck/sounds/673424/ |
+| `christmas-schneeball` | Schneeball trifft | `public/sounds/christmas/christmas-schneeball.mp3` | bajko | CC0 1.0 Universal (public domain) | https://freesound.org/people/bajko/sounds/378059/ |
+| `christmas-platsch` | Platsch | `public/sounds/christmas/christmas-platsch.mp3` | Breviceps | CC0 1.0 Universal (public domain) | https://freesound.org/people/Breviceps/sounds/445117/ |
+| `christmas-pfiff` | Pfiff | `public/sounds/football/football-pfiff.mp3` | same file as `football-pfiff` | CC0 1.0 Universal (public domain) | see `football-pfiff` |
+| `christmas-kufen` | Kufen auf dem Eis | `public/sounds/christmas/christmas-kufen.mp3` | Rehanjo | CC0 1.0 Universal (public domain) | https://freesound.org/people/Rehanjo/sounds/593623/ |
+| `christmas-wasser` | Plätscherndes Wasser | `public/sounds/pirates/pirates-platscher.mp3` | same file as `pirates-platscher` | CC0 1.0 Universal (public domain) | see `pirates-platscher` |
+| `christmas-wind` | Wind | `public/sounds/ambience/ambience-wind.mp3` | same file as `ambience-wind` | CC0 1.0 Universal (public domain) | see `ambience-wind` |
+| `christmas-starkerwind` | Starker Wind | `public/sounds/ambience/ambience-sturm.mp3` | same file as `ambience-sturm` | CC0 1.0 Universal (public domain) | see `ambience-sturm` |
+| `christmas-eisigerwind` | Eisiger Wind | `public/sounds/christmas/christmas-eisigerwind.mp3` | AbolGuga | CC0 1.0 Universal (public domain) | https://freesound.org/people/AbolGuga/sounds/620539/ (loop cut) |
+| `christmas-windbaeume` | Wind in den Bäumen | `public/sounds/christmas/christmas-windbaeume.mp3` | Thimras | CC0 1.0 Universal (public domain) | https://opengameart.org/content/park-ambiences (loop cut) |
+| `christmas-dachboden` | Wind auf dem Dachboden | `public/sounds/christmas/christmas-dachboden.mp3` | Kinoton | CC0 1.0 Universal (public domain) | https://freesound.org/people/Kinoton/sounds/815100/ (loop cut) |
 | `ambience-wind` | Wind | `public/sounds/ambience/ambience-wind.mp3` | Jeffreys2 | CC0 1.0 Universal (public domain) | https://freesound.org/people/Jeffreys2/sounds/327771/ (loop cut) |
 | `ambience-meer` | Meer | `public/sounds/ambience/ambience-meer.mp3` | derjuli | CC0 1.0 Universal (public domain) | https://freesound.org/people/derjuli/sounds/693389/ (loop cut) |
 | `ambience-sturm` | Sturm | `public/sounds/ambience/ambience-sturm.mp3` | Tsorthan Grove | CC0 1.0 Universal (public domain) | https://opengameart.org/content/storm-arwen-2022 (loop cut) |

@@ -706,6 +706,734 @@
       "duration": 5.59
     },
     {
+      "id": "christmas-weihnachtsmusik",
+      "name": "Weihnachtsmusik",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-weihnachtsmusik.mp3",
+      "duration": 10.89
+    },
+    {
+      "id": "christmas-froehlichemusik",
+      "name": "Fröhliche Musik",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-froehlichemusik.mp3",
+      "duration": 6.77
+    },
+    {
+      "id": "christmas-klavier",
+      "name": "Klaviermusik",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-klavier.mp3",
+      "duration": 13.51
+    },
+    {
+      "id": "christmas-nachtmusik",
+      "name": "Leise Nachtmusik",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-nachtmusik.mp3",
+      "duration": 11.39
+    },
+    {
+      "id": "christmas-zaubermusik",
+      "name": "Leise Zaubermusik",
+      "category": "christmas",
+      "icon": "sparkle",
+      "file": "christmas/christmas-zaubermusik.mp3",
+      "duration": 8.33
+    },
+    {
+      "id": "christmas-karussell",
+      "name": "Karussellmusik",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-karussell.mp3",
+      "duration": 7.26
+    },
+    {
+      "id": "christmas-markt",
+      "name": "Weihnachtsmarkt",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-markt.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-gloeckchen",
+      "name": "Leise Glöckchen",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-gloeckchen.mp3",
+      "duration": 3.16
+    },
+    {
+      "id": "christmas-schlittenfliegt",
+      "name": "Schlitten fliegt davon",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-schlittenfliegt.mp3",
+      "duration": 5.33
+    },
+    {
+      "id": "christmas-zauberglitzern",
+      "name": "Zauberglitzern",
+      "category": "christmas",
+      "icon": "sparkle",
+      "file": "princess/princess-funkeln.mp3",
+      "duration": 1.49
+    },
+    {
+      "id": "christmas-wuschplopp",
+      "name": "Wusch und Plopp",
+      "category": "christmas",
+      "icon": "sparkle",
+      "file": "christmas/christmas-wuschplopp.mp3",
+      "duration": 0.97
+    },
+    {
+      "id": "christmas-boing",
+      "name": "Boing",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-boing.mp3",
+      "duration": 1.15
+    },
+    {
+      "id": "christmas-lachen",
+      "name": "Lachen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-lachen.mp3",
+      "duration": 2.09
+    },
+    {
+      "id": "christmas-kinderlachen",
+      "name": "Kinder lachen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-kinderlachen.mp3",
+      "duration": 3.19
+    },
+    {
+      "id": "christmas-familielacht",
+      "name": "Familie lacht",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-familielacht.mp3",
+      "duration": 4.05
+    },
+    {
+      "id": "christmas-tiefeslachen",
+      "name": "Tiefes Lachen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-tiefeslachen.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-oh",
+      "name": "Oh!",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-oh.mp3",
+      "duration": 1.07
+    },
+    {
+      "id": "christmas-weinen",
+      "name": "Weinen",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-weinen.mp3",
+      "duration": 1.75
+    },
+    {
+      "id": "christmas-niesen",
+      "name": "Niesen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-niesen.mp3",
+      "duration": 2.27
+    },
+    {
+      "id": "christmas-schnarchen",
+      "name": "Schnarchen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-schnarchen.mp3",
+      "duration": 4.36
+    },
+    {
+      "id": "christmas-stoehnen",
+      "name": "Stöhnen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-stoehnen.mp3",
+      "duration": 1.99
+    },
+    {
+      "id": "christmas-schnuppern",
+      "name": "Schnuppern",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-schnuppern.mp3",
+      "duration": 2.35
+    },
+    {
+      "id": "christmas-schluerfen",
+      "name": "Schlürfen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-schluerfen.mp3",
+      "duration": 3.4
+    },
+    {
+      "id": "christmas-klatschen",
+      "name": "Klatschen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-klatschen.mp3",
+      "duration": 4.05
+    },
+    {
+      "id": "christmas-applaus",
+      "name": "Applaus",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "circus/circus-applaus.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "christmas-jubeln",
+      "name": "Jubeln",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "football/football-jubel.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "christmas-kinderjubeln",
+      "name": "Kinder jubeln",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-kinderjubeln.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-kinderrufen",
+      "name": "Kinder rufen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-kinderrufen.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-kindersingen",
+      "name": "Kinder singen",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-kindersingen.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "christmas-maedchensingt",
+      "name": "Mädchen singt",
+      "category": "christmas",
+      "icon": "music",
+      "file": "christmas/christmas-maedchensingt.mp3",
+      "duration": 6.03
+    },
+    {
+      "id": "christmas-menschen",
+      "name": "Viele Menschen",
+      "category": "christmas",
+      "icon": "stars",
+      "file": "christmas/christmas-menschen.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-strasse",
+      "name": "Belebte Straße",
+      "category": "christmas",
+      "icon": "castle",
+      "file": "ambience/ambience-stadt.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "christmas-vogel",
+      "name": "Vogel",
+      "category": "christmas",
+      "icon": "bird",
+      "file": "christmas/christmas-vogel.mp3",
+      "duration": 4.52
+    },
+    {
+      "id": "christmas-rotkehlchen",
+      "name": "Rotkehlchen",
+      "category": "christmas",
+      "icon": "bird",
+      "file": "christmas/christmas-rotkehlchen.mp3",
+      "duration": 3.37
+    },
+    {
+      "id": "christmas-eule",
+      "name": "Eule",
+      "category": "christmas",
+      "icon": "bird",
+      "file": "christmas/christmas-eule.mp3",
+      "duration": 4.44
+    },
+    {
+      "id": "christmas-fluegel",
+      "name": "Flügelschlagen",
+      "category": "christmas",
+      "icon": "bird",
+      "file": "christmas/christmas-fluegel.mp3",
+      "duration": 2.17
+    },
+    {
+      "id": "christmas-katze",
+      "name": "Katze",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-katze.mp3",
+      "duration": 1.59
+    },
+    {
+      "id": "christmas-hund",
+      "name": "Hund bellt",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-hund.mp3",
+      "duration": 1.99
+    },
+    {
+      "id": "christmas-maus",
+      "name": "Maus piepst",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-maus.mp3",
+      "duration": 0.97
+    },
+    {
+      "id": "christmas-hamster",
+      "name": "Hamster piepst",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-hamster.mp3",
+      "duration": 1.18
+    },
+    {
+      "id": "christmas-eichhoernchen",
+      "name": "Eichhörnchen",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-eichhoernchen.mp3",
+      "duration": 4.23
+    },
+    {
+      "id": "christmas-hase",
+      "name": "Hase hoppelt weg",
+      "category": "christmas",
+      "icon": "heart",
+      "file": "christmas/christmas-hase.mp3",
+      "duration": 2.35
+    },
+    {
+      "id": "christmas-huhn",
+      "name": "Huhn gackert",
+      "category": "christmas",
+      "icon": "bird",
+      "file": "christmas/christmas-huhn.mp3",
+      "duration": 4.0
+    },
+    {
+      "id": "christmas-bauernhof",
+      "name": "Bauernhoftiere",
+      "category": "christmas",
+      "icon": "horse",
+      "file": "christmas/christmas-bauernhof.mp3",
+      "duration": 6.71
+    },
+    {
+      "id": "christmas-tee",
+      "name": "Tee eingießen",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "christmas/christmas-tee.mp3",
+      "duration": 4.55
+    },
+    {
+      "id": "christmas-loeffel",
+      "name": "Löffel in der Tasse",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-loeffel.mp3",
+      "duration": 4.05
+    },
+    {
+      "id": "christmas-tassen",
+      "name": "Tassen klirren",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-tassen.mp3",
+      "duration": 1.99
+    },
+    {
+      "id": "christmas-ei",
+      "name": "Ei aufschlagen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-ei.mp3",
+      "duration": 2.82
+    },
+    {
+      "id": "christmas-ruehren",
+      "name": "Rühren",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-ruehren.mp3",
+      "duration": 4.55
+    },
+    {
+      "id": "christmas-ofentuer",
+      "name": "Ofentür",
+      "category": "christmas",
+      "icon": "castle",
+      "file": "christmas/christmas-ofentuer.mp3",
+      "duration": 3.03
+    },
+    {
+      "id": "christmas-kuechenwecker",
+      "name": "Küchenwecker",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-kuechenwecker.mp3",
+      "duration": 2.27
+    },
+    {
+      "id": "christmas-kueche",
+      "name": "Küchengeräusche",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-kueche.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "christmas-milch",
+      "name": "Milch im Eimer",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "christmas/christmas-milch.mp3",
+      "duration": 4.55
+    },
+    {
+      "id": "christmas-dose",
+      "name": "Dosendeckel",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-dose.mp3",
+      "duration": 1.7
+    },
+    {
+      "id": "christmas-uhr",
+      "name": "Uhr tickt",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-uhr.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-telefon",
+      "name": "Telefon klingelt",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-telefon.mp3",
+      "duration": 3.4
+    },
+    {
+      "id": "christmas-klopfen",
+      "name": "Klopfen",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-klopfen.mp3",
+      "duration": 2.12
+    },
+    {
+      "id": "christmas-fenster",
+      "name": "Klopfen am Fenster",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-fenster.mp3",
+      "duration": 3.03
+    },
+    {
+      "id": "christmas-tuer",
+      "name": "Tür geht auf",
+      "category": "christmas",
+      "icon": "castle",
+      "file": "christmas/christmas-tuer.mp3",
+      "duration": 1.2
+    },
+    {
+      "id": "christmas-knarrtuer",
+      "name": "Knarrende Tür",
+      "category": "christmas",
+      "icon": "castle",
+      "file": "christmas/christmas-knarrtuer.mp3",
+      "duration": 4.55
+    },
+    {
+      "id": "christmas-boden",
+      "name": "Knarrender Boden",
+      "category": "christmas",
+      "icon": "castle",
+      "file": "christmas/christmas-boden.mp3",
+      "duration": 3.19
+    },
+    {
+      "id": "christmas-treppe",
+      "name": "Schritte auf der Treppe",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-treppe.mp3",
+      "duration": 4.55
+    },
+    {
+      "id": "christmas-schwereschritte",
+      "name": "Schwere Schritte",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-schwereschritte.mp3",
+      "duration": 2.95
+    },
+    {
+      "id": "christmas-rennen",
+      "name": "Rennende Schritte",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-rennen.mp3",
+      "duration": 2.85
+    },
+    {
+      "id": "christmas-vorhang",
+      "name": "Vorhang",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-vorhang.mp3",
+      "duration": 1.72
+    },
+    {
+      "id": "christmas-schulglocke",
+      "name": "Schulglocke",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-schulglocke.mp3",
+      "duration": 3.45
+    },
+    {
+      "id": "christmas-ladenglocke",
+      "name": "Türglocke im Laden",
+      "category": "christmas",
+      "icon": "bell",
+      "file": "christmas/christmas-ladenglocke.mp3",
+      "duration": 0.97
+    },
+    {
+      "id": "christmas-muenzen",
+      "name": "Münzen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "circus/circus-muenzen.mp3",
+      "duration": 0.65
+    },
+    {
+      "id": "christmas-kiste",
+      "name": "Kiste öffnen",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-kiste.mp3",
+      "duration": 0.91
+    },
+    {
+      "id": "christmas-sack",
+      "name": "Rascheln im Sack",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-sack.mp3",
+      "duration": 3.53
+    },
+    {
+      "id": "christmas-papierreisst",
+      "name": "Papier reißt",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-papierreisst.mp3",
+      "duration": 0.76
+    },
+    {
+      "id": "christmas-schere",
+      "name": "Schere schneidet",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-schere.mp3",
+      "duration": 1.78
+    },
+    {
+      "id": "christmas-stift",
+      "name": "Stift schreibt",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-stift.mp3",
+      "duration": 4.05
+    },
+    {
+      "id": "christmas-kamera",
+      "name": "Kamera klickt",
+      "category": "christmas",
+      "icon": "note",
+      "file": "christmas/christmas-kamera.mp3",
+      "duration": 0.47
+    },
+    {
+      "id": "christmas-klicken",
+      "name": "Klicken",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "skate/skate-klick.mp3",
+      "duration": 0.42
+    },
+    {
+      "id": "christmas-hebel",
+      "name": "Hebel",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-hebel.mp3",
+      "duration": 0.63
+    },
+    {
+      "id": "christmas-haemmern",
+      "name": "Hämmern",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-haemmern.mp3",
+      "duration": 1.59
+    },
+    {
+      "id": "christmas-maschine",
+      "name": "Maschine brummt",
+      "category": "christmas",
+      "icon": "rocket",
+      "file": "christmas/christmas-maschine.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-werkstatt",
+      "name": "Volle Werkstatt",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-werkstatt.mp3",
+      "duration": 8.05
+    },
+    {
+      "id": "christmas-absturz",
+      "name": "Absturz",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-absturz.mp3",
+      "duration": 1.52
+    },
+    {
+      "id": "christmas-plumps",
+      "name": "Plumps",
+      "category": "christmas",
+      "icon": "drum",
+      "file": "christmas/christmas-plumps.mp3",
+      "duration": 2.04
+    },
+    {
+      "id": "christmas-schneeball",
+      "name": "Schneeball trifft",
+      "category": "christmas",
+      "icon": "ball",
+      "file": "christmas/christmas-schneeball.mp3",
+      "duration": 0.6
+    },
+    {
+      "id": "christmas-platsch",
+      "name": "Platsch",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "christmas/christmas-platsch.mp3",
+      "duration": 0.57
+    },
+    {
+      "id": "christmas-pfiff",
+      "name": "Pfiff",
+      "category": "christmas",
+      "icon": "whistle",
+      "file": "football/football-pfiff.mp3",
+      "duration": 2.09
+    },
+    {
+      "id": "christmas-kufen",
+      "name": "Kufen auf dem Eis",
+      "category": "christmas",
+      "icon": "skate",
+      "file": "christmas/christmas-kufen.mp3",
+      "duration": 5.04
+    },
+    {
+      "id": "christmas-wasser",
+      "name": "Plätscherndes Wasser",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "pirates/pirates-platscher.mp3",
+      "duration": 1.38
+    },
+    {
+      "id": "christmas-wind",
+      "name": "Wind",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "ambience/ambience-wind.mp3",
+      "duration": 12.04
+    },
+    {
+      "id": "christmas-starkerwind",
+      "name": "Starker Wind",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "ambience/ambience-sturm.mp3",
+      "duration": 14.03
+    },
+    {
+      "id": "christmas-eisigerwind",
+      "name": "Eisiger Wind",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "christmas/christmas-eisigerwind.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-windbaeume",
+      "name": "Wind in den Bäumen",
+      "category": "christmas",
+      "icon": "wave",
+      "file": "christmas/christmas-windbaeume.mp3",
+      "duration": 10.03
+    },
+    {
+      "id": "christmas-dachboden",
+      "name": "Wind auf dem Dachboden",
+      "category": "christmas",
+      "icon": "ghost",
+      "file": "christmas/christmas-dachboden.mp3",
+      "duration": 10.03
+    },
+    {
       "id": "ambience-wind",
       "name": "Wind",
       "category": "ambience",

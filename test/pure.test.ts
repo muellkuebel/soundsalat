@@ -122,6 +122,19 @@ test('every category has a tab picture, a cached tab, sounds, and a fallback', (
   assert.equal(new Set(CATEGORIES.map((category) => category.color)).size, CATEGORIES.length)
 })
 
+test('Weihnachten is the first tab and has every story sound with its own picture', () => {
+  assert.equal(CATEGORIES[0]?.id, 'christmas')
+  const christmas = manifestClips.filter((clip) => clip.category === 'christmas')
+  assert.ok(christmas.length >= 90)
+  const names = christmas.map((clip) => clip.name)
+  for (const name of ['Niesen', 'Schnarchen', 'Weihnachtsmusik', 'Karussellmusik', 'Hämmern', 'Eule', 'Telefon klingelt', 'Wind', 'Plumps']) {
+    assert.ok(names.includes(name), name)
+  }
+  assert.equal(new Set(names).size, names.length, 'labels are unique')
+  const pictures = christmas.map((clip) => readFileSync(new URL(`emoji/${clip.id}.svg`, publicDir), 'utf8'))
+  assert.equal(new Set(pictures).size, pictures.length, 'every Weihnachten tile has its own picture')
+})
+
 test('christmas has sleigh bells and snow steps, ambience clips are long', () => {
   const christmas = manifestClips.filter((clip) => clip.category === 'christmas').map((clip) => clip.id)
   assert.ok(christmas.includes('christmas-schlitten'))
